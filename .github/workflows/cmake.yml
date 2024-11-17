@@ -1,0 +1,16 @@
+name: CMake
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  global_job:
+    runs-on: ubuntu-latest
+    name: cmake
+    steps:
+    - uses: actions/checkout@v3
+    - run: make && make re && make fclean

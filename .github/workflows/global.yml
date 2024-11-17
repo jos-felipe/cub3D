@@ -1,0 +1,16 @@
+name: global
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  global_job:
+    runs-on: ubuntu-latest
+    name: global
+    steps:
+    - uses: actions/checkout@v3
+    - run: sudo apt update && sudo apt install valgrind && cd qa/global && /usr/bin/env python3 global.py

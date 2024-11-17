@@ -1,0 +1,19 @@
+name: builtins
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  builtins_job:
+    runs-on: ubuntu-latest
+    name: builtins
+    steps:
+    - uses: actions/checkout@v3
+    # - uses: alexandregv/norminette-action@v3
+    #   with:
+    #     flags: "src/ include/ lib/"
+    - run: sudo apt update && sudo apt install valgrind && cd qa/unit_test && /usr/bin/env python3 builtin_unit.py

@@ -1,0 +1,12 @@
+# Keep directories
+/*
+!.github
+!qa
+!include
+!lib
+!src
+
+# Keep files
+!main.c
+!Makefile
+!.gitignore

@@ -1,0 +1,16 @@
+name: core
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  core_job:
+    runs-on: ubuntu-latest
+    name: core
+    steps:
+    - uses: actions/checkout@v3
+    - run: sudo apt update && sudo apt install valgrind && cd qa/unit_test && /usr/bin/env python3 core_unit.py
