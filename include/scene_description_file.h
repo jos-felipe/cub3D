@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/21 11:41:48 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:16:56 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,16 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "libft.h"
+# include "get_next_line_bonus.h"
 
-# define ERROR_FILE_EXT "Error\nInvalid file extension. Must be .cub"
-# define ERROR_FILE_OPEN "Error\nCould not open the file"
-# define ERROR_INVALID_MAP "Error\nMap is not properly closed by walls"
-# define ERROR_INVALID_TEXTURE "Error\nInvalid texture path"
-# define ERROR_INVALID_COLOR "Error\nInvalid color format"
-# define ERROR_INVALID_PLAYER "Error\nInvalid player position or multiple players"
-# define ERROR_MAP_CHARS "Error\nInvalid characters in map"
+# define ERROR_FILE_EXT "Error\nInvalid file extension. Must be .cub\n"
+# define ERROR_FILE_OPEN "Error\nCould not open the file\n"
+# define ERROR_INVALID_MAP "Error\nMap is not properly closed by walls\n"
+# define ERROR_INVALID_TEXTURE "Error\nInvalid texture path\n"
+# define ERROR_INVALID_COLOR "Error\nInvalid color format\n"
+# define ERROR_INVALID_PLAYER "Error\nInvalid player position or \
+multiple players\n"
+# define ERROR_MAP_CHARS "Error\nInvalid characters in map\n"
 
 typedef struct s_color
 {
