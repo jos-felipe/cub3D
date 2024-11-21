@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/19 23:41:42 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/21 15:24:52 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,11 +71,12 @@ static int process_map_char(t_map *map, int i, int j, int *player_count)
 }
 
 
-/* Requirement (g): Parse texture identifiers and paths */
 int parse_textures(char *line, t_scene *scene)
 {
     char **split;
+    int ret;
 
+    ret = 0;
     split = ft_split(line, ' ');
     if (!split[0] || !split[1])
         return (write(2, ERROR_INVALID_TEXTURE, 
@@ -90,12 +91,11 @@ int parse_textures(char *line, t_scene *scene)
     else if (ft_strcmp(split[0], "EA") == 0)
         scene->textures.east = ft_strdup(split[1]);
     else
-        return (0);
+        ret = 1;
     free_split(split);
-    return (1);
+    return (ret);
 }
 
-/* Requirement (g): Parse floor and ceiling colors */
 int parse_colors(char *line, t_scene *scene)
 {
     char **split;
@@ -105,22 +105,21 @@ int parse_colors(char *line, t_scene *scene)
     split = ft_split(line, ' ');
     if (!split[0] || !split[1])
         return (write(2, ERROR_INVALID_COLOR, ft_strlen(ERROR_INVALID_COLOR)));
-
+    if (split[0][0] == 'F')
+        color = &scene->floor;
+    else
+        color = &scene->ceiling;
     rgb = ft_split(split[1], ',');
-    color = (split[0][0] == 'F') ? &scene->floor : &scene->ceiling;
-
     color->r = ft_atoi(rgb[0]);
     color->g = ft_atoi(rgb[1]);
     color->b = ft_atoi(rgb[2]);
-
     if (color->r < 0 || color->r > 255 || 
         color->g < 0 || color->g > 255 || 
         color->b < 0 || color->b > 255)
         return (write(2, ERROR_INVALID_COLOR, ft_strlen(ERROR_INVALID_COLOR)));
-
-    free_split(split);
     free_split(rgb);
-    return (1);
+    free_split(split);
+    return (0);
 }
 
 /* Requirements (e,f): Parse map handling spaces */
