@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/21 11:48:16 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/21 12:02:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int check_file_extension(char *file_path)
     char    *ext;
 
     if (!file_path)
-        return (0);
+        return (1);
     len = ft_strlen(file_path);
     if (len < 4)
-        return (0);
+        return (1);
     ext = file_path + len - 4;
-    return (ft_strncmp(ext, ".cub", 4) == 0);
+    return (ft_strncmp(ext, ".cub", 4));
 }
