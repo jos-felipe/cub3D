@@ -6,15 +6,15 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 15:40:55 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:16:33 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
-static int init_scene(t_scene *scene);
-static int process_line(char *line, t_scene *scene, int fd);
-static int is_valid_map_char(char c);
+static int  init_scene(t_scene *scene);
+static int  process_line(char *line, t_scene *scene, int fd);
+static int  sanatize_check(t_scene *scene);
 
 int parse_scene(char *file_path, t_scene *scene)
 {
@@ -39,6 +39,7 @@ int parse_scene(char *file_path, t_scene *scene)
         line = get_next_line(fd);
     }
     close(fd);
+    ret = sanatize_check(scene);
     return (ret);
 }
 
@@ -70,13 +71,25 @@ static int process_line(char *line, t_scene *scene, int fd)
         return (parse_textures(line, scene));
     else if (line[0] == 'F' || line[0] == 'C')
         return (parse_colors(line, scene));
-    else if (is_valid_map_char(line[0]))
+    else if (is_a_valid_map_char(line[0]))
         return (parse_map(fd, scene));
     return (write(2, ERROR_MAP_CHARS, ft_strlen(ERROR_MAP_CHARS)));
 }
-static int is_valid_map_char(char c)
+int is_a_valid_map_char(char c)
 {
     return (ft_strchr("0NSEW1 ", c));
 }
 
-
+static int  sanatize_check(t_scene *scene)
+{
+    if (!scene->textures.north || !scene->textures.south || 
+        !scene->textures.west || !scene->textures.east)
+        return (write(2, ERROR_INVALID_TEXTURE, 
+                ft_strlen(ERROR_INVALID_TEXTURE)));
+    if (scene->floor.r == -1 || scene->floor.g == -1 || 
+        scene->floor.b == -1 || scene->ceiling.r == -1 || 
+        scene->ceiling.g == -1 || scene->ceiling.b == -1)
+        return (write(2, ERROR_INVALID_COLOR, 
+                ft_strlen(ERROR_INVALID_COLOR)));
+    return (0);
+}
