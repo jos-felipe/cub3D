@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 15:43:13 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:13:12 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int validate_map(t_map *map)
     int j;
     int player_count;
 
+    if (map->grid == NULL)
+        return(write(2, "MALLOC_ERROR", ft_strlen("MALLOC_ERROR")));
     player_count = 0;
     i = -1;
     while (++i < map->height)
