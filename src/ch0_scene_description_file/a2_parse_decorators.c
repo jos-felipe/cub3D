@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 15:41:45 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:02:09 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,11 @@ static  int write2err_and_2free(char **rgb, char **split)
     ft_free_split(rgb);
     ft_free_split(split);
     return (write(2, ERROR_INVALID_COLOR, ft_strlen(ERROR_INVALID_COLOR)));
+}
+
+int write2err_and_2free(char *err_msg, char **ss1, char **ss2)
+{
+    ft_free_split(ss1);
+    ft_free_split(ss2);
+    return (write(2, err_msg, ft_strlen(err_msg)));
 }
