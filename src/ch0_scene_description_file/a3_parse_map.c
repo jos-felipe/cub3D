@@ -6,54 +6,54 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 14:22:06 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 17:11:33 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
-static  int is_line_valid(char *line);
+static char **normalize_grid(char **grid,  t_map *map);
+static char **realloc_map(char **map, int height);
+static  int is_a_valid_map_line(char *line);
 static  int get_max_width(char **map);
-static  char **realloc_map(char **map, int height);
-static  void normalize_map(char **map, t_scene *scene);
 
 int parse_map(int fd, t_scene *scene)
 {
     char *line;
     char **temp_map;
     int height;
+    
     height = 0;
     temp_map = ft_calloc(1, sizeof(char *));
     line = get_next_line(fd);
     while (line)
     {
-        if (!is_line_valid(line))
+        if (!is_a_valid_map_line(line))
         {
             free(line);
-            ft_free_split(temp_map);
-            return(write(2, ERROR_MAP_CHARS, ft_strlen(ERROR_MAP_CHARS)));
+            return (write2err_and_2free(ERROR_MAP_CHARS, NULL, temp_map));
         }
         temp_map = realloc_map(temp_map, ++height);
+        if (!temp_map)
+            return (write2err_and_2free("MALLOC_ERROR", NULL, temp_map));
         temp_map[height - 1] = line;
         line = get_next_line(fd);
     }
     scene->map.height = height;
     scene->map.width = get_max_width(temp_map);
-    normalize_map(temp_map, scene);
+    scene->map.grid = normalize_grid(temp_map, &scene->map);
     ft_free_split(temp_map);
     return (validate_map(&scene->map));
 }
 
-static int    is_line_valid(char *line)
+static int    is_a_valid_map_line(char *line)
 {
     int i;
 
     i = 0;
     while (line[i])
     {
-        if (line[i] != '0' && line[i] != '1' && line[i] != ' ' 
-            && line[i] != 'N' && line[i] != 'S' 
-            && line[i] != 'E' && line[i] != 'W')
+        if (!is_a_valid_map_char(line[i]))
             return (0);
         i++;
     }
@@ -100,17 +100,23 @@ static int    get_max_width(char **map)
     return (max_width);
 }
 
-static  void normalize_map(char **map, t_scene *scene)
+static char **normalize_grid(char **grid,  t_map *map)
 {
-    int i;
+    char    **norm_grid;
+    int     i;
     
-    scene->map.grid = ft_calloc(scene->map.height + 1, sizeof(char *));
+    norm_grid = ft_calloc(map->height + 1, sizeof(char *));
+    if (!norm_grid)
+        return (NULL);
     i = 0;
-    while (i < scene->map.height)
+    while (i < map->height)
     {
-        scene->map.grid[i] = ft_calloc(scene->map.width + 1, sizeof(char));
-        ft_memset(scene->map.grid[i], ' ', scene->map.width);
-        ft_memcpy(scene->map.grid[i], map[i], ft_strlen(map[i]));
+        norm_grid[i] = ft_calloc(map->width + 1, sizeof(char));
+        if (!norm_grid[i])
+            return (NULL);
+        ft_memset(norm_grid[i], ' ', map->width);
+        ft_memcpy(norm_grid[i], grid[i], ft_strlen(grid[i]));
         i++;
     }
+    return (norm_grid);
 }
