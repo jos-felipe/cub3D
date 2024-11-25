@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 13:24:41 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 14:22:06 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,11 +104,11 @@ static  void normalize_map(char **map, t_scene *scene)
 {
     int i;
     
-    scene->map.grid = ft_calloc(scene->map.height, sizeof(char *));
+    scene->map.grid = ft_calloc(scene->map.height + 1, sizeof(char *));
     i = 0;
     while (i < scene->map.height)
     {
-        scene->map.grid[i] = ft_calloc(scene->map.width, sizeof(char));
+        scene->map.grid[i] = ft_calloc(scene->map.width + 1, sizeof(char));
         ft_memset(scene->map.grid[i], ' ', scene->map.width);
         ft_memcpy(scene->map.grid[i], map[i], ft_strlen(map[i]));
         i++;
