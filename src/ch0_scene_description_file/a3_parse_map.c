@@ -1,20 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_map.c                                        :+:      :+:    :+:   */
+/*   a3_parse_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/21 16:32:40 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:24:41 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene_description_file.h"
+#include "ch0_scene_description_file.h"
 
-static int is_line_valid(char *line);
-static int get_max_width(char **map);
-static char **realloc_map(char **map, int height);
+static  int is_line_valid(char *line);
+static  int get_max_width(char **map);
+static  char **realloc_map(char **map, int height);
+static  void normalize_map(char **map, t_scene *scene);
 
 int parse_map(int fd, t_scene *scene)
 {
@@ -36,10 +37,10 @@ int parse_map(int fd, t_scene *scene)
         temp_map[height - 1] = line;
         line = get_next_line(fd);
     }
-    scene->map.grid = temp_map;
     scene->map.height = height;
     scene->map.width = get_max_width(temp_map);
-
+    normalize_map(temp_map, scene);
+    ft_free_split(temp_map);
     return (validate_map(&scene->map));
 }
 
@@ -97,4 +98,19 @@ static int    get_max_width(char **map)
         i++;
     }
     return (max_width);
+}
+
+static  void normalize_map(char **map, t_scene *scene)
+{
+    int i;
+    
+    scene->map.grid = ft_calloc(scene->map.height, sizeof(char *));
+    i = 0;
+    while (i < scene->map.height)
+    {
+        scene->map.grid[i] = ft_calloc(scene->map.width, sizeof(char));
+        ft_memset(scene->map.grid[i], ' ', scene->map.width);
+        ft_memcpy(scene->map.grid[i], map[i], ft_strlen(map[i]));
+        i++;
+    }
 }
