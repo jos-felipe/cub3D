@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 15:26:02 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:43:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int validate_map(t_map *map)
 
 static int check_surrounding_walls(t_map *map, int i, int j)
 {
-    if (!map || !map->grid)
-        return (0);
     if (i <= 0 || i >= map->height - 1)
         return (0); 
     if (j <= 0 || j >= map->width - 1)

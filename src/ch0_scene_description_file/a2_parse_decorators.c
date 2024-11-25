@@ -6,13 +6,13 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 13:31:30 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 15:41:45 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
-static  int is_a_valid_color(t_color *color, char **rgb);
+static  int is_valid_color(t_color *color, char **rgb);
 static  int write2err_and_2free(char **rgb, char **split);
 
 int parse_textures(char *line, t_scene *scene)
@@ -59,14 +59,14 @@ int parse_colors(char *line, t_scene *scene)
     rgb = ft_split(split[1], ',');
     if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
         return (write2err_and_2free(rgb, split));
-    if (!is_a_valid_color(color, rgb))
+    if (!is_valid_color(color, rgb))
         return (write2err_and_2free(rgb, split));
     ft_free_split(rgb);
     ft_free_split(split);
     return (0);
 }
 
-static  int is_a_valid_color(t_color *color, char **rgb)
+static  int is_valid_color(t_color *color, char **rgb)
 {
     int r;
     int g;
