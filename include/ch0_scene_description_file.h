@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 10:58:01 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 16:23:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@
 # define ERROR_INVALID_MAP "Error\nMap is not properly closed by walls\n"
 # define ERROR_INVALID_TEXTURE "Error\nInvalid texture path\n"
 # define ERROR_INVALID_COLOR "Error\nInvalid color format\n"
-# define ERROR_INVALID_PLAYER "Error\nInvalid player position or \
-multiple players\n"
+# define ERROR_INVALID_PLAYER "Error\nInvalid player position or multiple players\n"
 # define ERROR_MAP_CHARS "Error\nInvalid characters in map\n"
 
 typedef struct s_color
@@ -61,12 +60,13 @@ typedef struct s_scene
     t_map       map;
 }   t_scene;
 
-/* Function prototypes */
-int     parse_scene(char *file_path, t_scene *scene);
 int     check_file_extension(char *file_path);
+int     is_a_valid_map_char(char c);
 int     parse_textures(char *line, t_scene *scene);
 int     parse_colors(char *line, t_scene *scene);
 int     parse_map(int fd, t_scene *scene);
+int     parse_scene(char *file_path, t_scene *scene);
 int     validate_map(t_map *map);
+int     write2err_and_2free(char *err_msg, char **ss1, char **ss2);
 
 #endif
