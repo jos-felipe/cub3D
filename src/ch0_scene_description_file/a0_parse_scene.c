@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 11:14:13 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/25 13:04:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "scene_description_file.h"
+#include "ch0_scene_description_file.h"
 
 static int init_scene(t_scene *scene);
 static int process_line(char *line, t_scene *scene, int fd);
@@ -48,6 +48,12 @@ static int init_scene(t_scene *scene)
     scene->textures.south = NULL;
     scene->textures.west = NULL;
     scene->textures.east = NULL;
+    scene->floor.r = -1;
+    scene->floor.g = -1;
+    scene->floor.b = -1;
+    scene->ceiling.r = -1;
+    scene->ceiling.g = -1;
+    scene->ceiling.b = -1;
     scene->map.grid = NULL;
     scene->map.width = 0;
     scene->map.height = 0;
@@ -56,6 +62,7 @@ static int init_scene(t_scene *scene)
     scene->map.player_dir = '\0';
     return (1);
 }
+
 static int process_line(char *line, t_scene *scene, int fd)
 {
     if (line[0] == 'N' || line[0] == 'S' || 
