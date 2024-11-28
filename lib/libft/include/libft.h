@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/24 11:14:54 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 11:29:48 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:34:06 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int		ft_atoi(const char *nptr);
 void	*ft_calloc(size_t count, size_t size);
 char	*ft_strdup(const char *s1);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
-// char	*ft_strjoin(char const *s1, char const *s2);
 char	*ft_itoa(int n);
 char	**ft_split(char const *s, char c);
 void	ft_free_split(char **split);
