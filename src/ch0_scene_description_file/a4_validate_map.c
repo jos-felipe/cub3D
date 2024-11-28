@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   a4_validate_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 17:13:12 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:17:50 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch0_scene_description_file.h"
+#include "../../include/ch0_scene_description_file.h"
 
 static  int check_surrounding_walls(t_map *map, int i, int j);
 static  int process_map_char(t_map *map, int i, int j, int *player_count);

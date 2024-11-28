@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   a0_parse_scene.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 16:16:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:11:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch0_scene_description_file.h"
+#include "../../include/ch0_scene_description_file.h"
 
 static int  init_scene(t_scene *scene);
 static int  process_line(char *line, t_scene *scene, int fd);
@@ -77,7 +77,12 @@ static int process_line(char *line, t_scene *scene, int fd)
 }
 int is_a_valid_map_char(char c)
 {
-    return (ft_strchr("0NSEW1 ", c));
+    int ret;
+
+    ret = 0;
+    if (ft_strchr("0NSEW1 ", c))
+        ret = 1;
+    return (ret);
 }
 
 static int  sanatize_check(t_scene *scene)
