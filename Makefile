@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/11/28 11:15:17 by josfelip         ###   ########.fr        #
+#    Updated: 2024/11/28 13:41:49 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ PROJECT_NAME = cub3D
 
 # Target executable
 NAME = ${PROJECT_NAME}
-ARGS =
+ARGS = maze.cub
 
 # Compiler directives
 CC = cc
