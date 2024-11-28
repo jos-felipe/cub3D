@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:11:58 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:31:43 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ch0_scene_description_file.h"
+#include "ch0_scene_description_file.h"
 
 static int  init_scene(t_scene *scene);
 static int  process_line(char *line, t_scene *scene, int fd);

@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:13:05 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:31:35 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ch0_scene_description_file.h"
+#include "ch0_scene_description_file.h"
 
 int check_file_extension(char *file_path)
 {

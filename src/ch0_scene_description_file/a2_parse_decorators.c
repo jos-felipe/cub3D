@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:16:53 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:31:30 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ch0_scene_description_file.h"
+#include "ch0_scene_description_file.h"
 
 static  int is_valid_color(t_color *color, char **rgb);
 

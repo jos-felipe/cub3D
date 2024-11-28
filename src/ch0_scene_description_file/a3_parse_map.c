@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:17:35 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:31:21 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/ch0_scene_description_file.h"
+#include "ch0_scene_description_file.h"
 
 static char **normalize_grid(char **grid,  t_map *map);
 static char **realloc_map(char **map, int height);
