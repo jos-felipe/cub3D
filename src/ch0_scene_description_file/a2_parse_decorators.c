@@ -3,17 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   a2_parse_decorators.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 16:02:09 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 15:31:30 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
 static  int is_valid_color(t_color *color, char **rgb);
-static  int write2err_and_2free(char **rgb, char **split);
 
 int parse_textures(char *line, t_scene *scene)
 {
@@ -51,16 +50,16 @@ int parse_colors(char *line, t_scene *scene)
 
     split = ft_split(line, ' ');
     if (!split || !split[0] || !split[1])
-        return (write2err_and_2free(NULL, split));
+        return (write2err_and_2free(ERROR_INVALID_COLOR, NULL, split));
     if (split[0][0] == 'F')
         color = &scene->floor;
     else
         color = &scene->ceiling;
     rgb = ft_split(split[1], ',');
     if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
-        return (write2err_and_2free(rgb, split));
+        return (write2err_and_2free(ERROR_INVALID_COLOR, rgb, split));
     if (!is_valid_color(color, rgb))
-        return (write2err_and_2free(rgb, split));
+        return (write2err_and_2free(ERROR_INVALID_COLOR, rgb, split));
     ft_free_split(rgb);
     ft_free_split(split);
     return (0);
@@ -81,13 +80,6 @@ static  int is_valid_color(t_color *color, char **rgb)
     color->g = g;
     color->b = b;
     return (1);
-}
-
-static  int write2err_and_2free(char **rgb, char **split)
-{
-    ft_free_split(rgb);
-    ft_free_split(split);
-    return (write(2, ERROR_INVALID_COLOR, ft_strlen(ERROR_INVALID_COLOR)));
 }
 
 int write2err_and_2free(char *err_msg, char **ss1, char **ss2)

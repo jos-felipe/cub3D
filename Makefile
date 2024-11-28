@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/11/28 13:41:49 by josfelip         ###   ########.fr        #
+#    Updated: 2024/11/28 15:26:35 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,68 +19,67 @@ ARGS = maze.cub
 # Compiler directives
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
+DFLAGS = -g3
+
+# Directory structure
+SRC_DIR		= src
+OBJ_DIR		= obj
+INC_DIR		= include
+LIBFT_DIR	= lib/libft
 
 # Binaries for debugging purposes
-DFLAGS = -g3
 ifdef WITH_DEBUG
   NAME = ${PROJECT_NAME}_debug
   CFLAGS = ${DFLAGS}
-endif
-
-# Header files
-INCLUDE_DIR = include
-INCLUDE_PATH = ${wildcard $(INCLUDE_DIR)/*.h}
-INCLUDE = ${notdir $(INCLUDE_PATH)}
-
-# Source files
-SRC_DIR = src
-SRC_PATH = ${wildcard $(SRC_DIR)/*.c}
-SRC = ${notdir $(SRC_PATH)}
-
-# Object files
-OBJ_DIR = obj
-ifdef WITH_DEBUG
   OBJ_DIR = obj_debug
 endif
-OBJ_PATH = ${addprefix $(OBJ_DIR)/, $(SRC:%.c=%.o)}
 
-LIBFT_DIR = lib/libft
-LIBFT = libft.a
-LIBFT_PATH = ${addprefix $(LIBFT_DIR), $(LIBFT)}
+# Source files by component
+SRC_MAIN = main.c
+SRC_CH0 = ch0_scene_description_file/a0_parse_scene.c ch0_scene_description_file/a1_check_file_extension.c ch0_scene_description_file/a2_parse_decorators.c ch0_scene_description_file/a3_parse_map.c ch0_scene_description_file/a4_validate_map.c
+
+# Combine all sources with their paths
+SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
+		$(addprefix $(SRC_DIR)/, $(SRC_CH0))
+
+# Generate object file paths, maintaining directory structure
+OBJ	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+# Libraries
+LIBFT = $(LIBFT_DIR)/libft.a
+
+# Include paths
+INC	= -I$(INC_DIR) -I$(LIBFT_DIR)
 
 RM = rm -rf
 
 # Default target
-all: libft ${OBJ_DIR} ${NAME}
+all: ${NAME}
 
-libft:
+# Link the program
+$(NAME): $(LIBFT) $(OBJ)
+	$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+
+# Compile libft
+$(LIBFT):
 	@make -C ${LIBFT_DIR} --no-print-directory
-
-${OBJ_DIR}:
-	mkdir -p ${OBJ_DIR}
-
-# Compile source files into object files
-${OBJ_DIR}/%.o: ${SRC_DIR}/%.c ${INCLUDE_PATH}
-	${CC} ${CFLAGS} -I${INCLUDE_DIR} -c $< -o $@
-
-# Compile main.c into main.o
-$(OBJ_DIR)/main.o: main.c ${INCLUDE_PATH}
-	${CC} ${CFLAGS} -I${INCLUDE_DIR} -c $< -o $@
-
-# Link the executable
-${NAME}: ${OBJ_PATH} $(OBJ_DIR)/main.o
-	${CC} ${CFLAGS} -o ${NAME} ${OBJ_PATH} $(OBJ_DIR)/main.o -L $(LIBFT_DIR) -lft
-
+	
+# Compile source files
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) $(INC) -c $< -o $@
+	
 # Clean object files
 clean:
-	${RM} ${OBJ_DIR}
-	${RM} ${OBJ_DIR}_debug
+	${RM} $(OBJ_DIR)
+	${RM} $(OBJ_DIR)_debug
+	@make -C $(LIBFT_DIR) clean --no-print-directory
 
-# Clean executable, object files and library binaries
+# Clean everything
 fclean: clean
 	${RM} ${NAME}
 	${RM} ${NAME}_debug
-	@make fclean -C ${LIBFT_DIR} --no-print-directory
+	@make -C ${LIBFT_DIR} fclean --no-print-directory
 
 # Rebuild everything
 re: fclean all
