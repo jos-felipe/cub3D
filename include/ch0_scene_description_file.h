@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ch0_scene_description_file.h                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 17:13:47 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:25:28 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
-# include "libft.h"
-# include "get_next_line_bonus.h"
+# include "../lib/libft/include/libft.h"
+# include "../lib/libft/include/get_next_line_bonus.h"
 
 # define ERROR_FILE_EXT "Error\nInvalid file extension. Must be .cub\n"
 # define ERROR_FILE_OPEN "Error\nCould not open the file\n"
