@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_free_split.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/21 15:27:39 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/25 11:49:07 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/11/28 11:16:17 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft.h"
 
 void	ft_free_split(char **split)
 {
