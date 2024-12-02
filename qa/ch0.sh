@@ -86,9 +86,24 @@ else
     echo "OK"
 fi
 
-# 5. Invalid texture path
-echo "5. Invalid texture path"
+# 5.1 Invalid texture path
+echo "5a. Invalid texture path"
 ./$NAME asset/map/misconfig/08c-invalid_texture.cub 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
+    echo "KO"
+    echo "Actual:"
+    echo "$ERR"
+    echo "Expected:"
+    echo "$ERROR_INVALID_TEXTURE"
+    exit 1
+else
+    echo "OK"
+fi
+
+# 5.2 Null texture path
+echo "5b. Null texture path"
+./$NAME asset/map/misconfig/08d-null_texture.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
     echo "KO"
