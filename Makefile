@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
+#    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/11/28 15:26:35 by josfelip         ###   ########.fr        #
+#    Updated: 2024/12/02 05:17:46 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,12 @@ ifdef WITH_DEBUG
 endif
 
 # Source files by component
-SRC_MAIN = main.c
-SRC_CH0 = ch0_scene_description_file/a0_parse_scene.c ch0_scene_description_file/a1_check_file_extension.c ch0_scene_description_file/a2_parse_decorators.c ch0_scene_description_file/a3_parse_map.c ch0_scene_description_file/a4_validate_map.c
+SRC_MAIN	=	main.c
+SRC_CH0		=	ch0/a0_parse_scene.c \
+				ch0/a1_check_file_extension.c \
+		  		ch0/a2_parse_decorators.c \
+		  		ch0/a3_parse_map.c \
+		  		ch0/a4_validate_map.c
 
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
