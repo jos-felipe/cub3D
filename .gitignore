@@ -1,6 +1,7 @@
 # Keep directories
 /*
 !.github
+!asset
 !qa
 !include
 !lib

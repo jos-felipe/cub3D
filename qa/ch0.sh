@@ -43,7 +43,7 @@ else
 fi
 
 echo "2. Invalid file extension"
-./$NAME invalid_file.txt 2> $ERR_FILE
+./$NAME asset/map/misconfig/02-wrong_file_ext.cbb 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_FILE_EXT ]]; then
     echo "KO"
@@ -73,7 +73,7 @@ fi
 
 # 4. Invalid map format
 echo "4. Invalid map format"
-./$NAME map_invalid_format.cub 2> $ERR_FILE
+./$NAME asset/map/misconfig/05-incomplete_map.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_INVALID_MAP ]]; then
     echo "KO"
