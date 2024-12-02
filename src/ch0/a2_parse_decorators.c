@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a2_parse_decorators.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:31:30 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 05:32:08 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,11 +80,4 @@ static  int is_valid_color(t_color *color, char **rgb)
     color->g = g;
     color->b = b;
     return (1);
-}
-
-int write2err_and_2free(char *err_msg, char **ss1, char **ss2)
-{
-    ft_free_split(ss1);
-    ft_free_split(ss2);
-    return (write(2, err_msg, ft_strlen(err_msg)));
 }

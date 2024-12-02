@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a0_parse_scene.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:31:43 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 05:54:50 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,12 @@ int parse_scene(char *file_path, t_scene *scene)
     int     ret;
 
     ret = 0;
+    init_scene(scene);
     if (check_file_extension(file_path))
         return (write(2, ERROR_FILE_EXT, ft_strlen(ERROR_FILE_EXT)));
     fd = open(file_path, O_RDONLY);
     if (fd < 0)
         return (write(2, ERROR_FILE_OPEN, ft_strlen(ERROR_FILE_OPEN)));
-    init_scene(scene);
     line = get_next_line(fd);
     while (line)
     {

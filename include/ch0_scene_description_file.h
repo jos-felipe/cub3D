@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ch0_scene_description_file.h                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 11:25:28 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 05:30:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,6 @@ int     parse_map(int fd, t_scene *scene);
 int     parse_scene(char *file_path, t_scene *scene);
 int     validate_map(t_map *map);
 int     write2err_and_2free(char *err_msg, char **ss1, char **ss2);
+int     free_heap(t_scene *scene);
 
 #endif
