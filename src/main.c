@@ -6,15 +6,13 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 05:51:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 10:25:49 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 #include "../lib/libft/include/libft.h"
 #include "../include/ch0_scene_description_file.h"
-
-#define ERROR_INVALID_ARGS "Error\nInvalid arguments. Try: ./cub3D with a map in format *.cub\n"
 
 int	main(int argc, char *argv[])
 {
