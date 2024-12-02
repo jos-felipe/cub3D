@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 05:54:50 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 13:00:29 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int  init_scene(t_scene *scene);
 static int  process_line(char *line, t_scene *scene, int fd);
-static int  sanatize_check(t_scene *scene);
+// static int  sanatize_check(t_scene *scene);
 
 int parse_scene(char *file_path, t_scene *scene)
 {
@@ -25,10 +25,10 @@ int parse_scene(char *file_path, t_scene *scene)
     ret = 0;
     init_scene(scene);
     if (check_file_extension(file_path))
-        return (write(2, ERROR_FILE_EXT, ft_strlen(ERROR_FILE_EXT)));
+        return (write2err_and_return(ERROR_FILE_EXT, 2));
     fd = open(file_path, O_RDONLY);
     if (fd < 0)
-        return (write(2, ERROR_FILE_OPEN, ft_strlen(ERROR_FILE_OPEN)));
+        return (write2err_and_return(ERROR_FILE_OPEN, 3));
     line = get_next_line(fd);
     while (line)
     {
@@ -39,7 +39,7 @@ int parse_scene(char *file_path, t_scene *scene)
         line = get_next_line(fd);
     }
     close(fd);
-    ret = sanatize_check(scene);
+    // ret = sanatize_check(scene);
     return (ret);
 }
 
@@ -66,15 +66,16 @@ static int init_scene(t_scene *scene)
 
 static int process_line(char *line, t_scene *scene, int fd)
 {
-    if (line[0] == 'N' || line[0] == 'S' || 
-        line[0] == 'W' || line[0] == 'E')
+    if (ft_strchr("NSWE", line[0]))
         return (parse_textures(line, scene));
-    else if (line[0] == 'F' || line[0] == 'C')
+    else if (ft_strchr("FC", line[0]))
         return (parse_colors(line, scene));
-    else if (is_a_valid_map_char(line[0]))
+    else if (ft_strchr("1 ", line[0]))
         return (parse_map(fd, scene));
-    return (write(2, ERROR_MAP_CHARS, ft_strlen(ERROR_MAP_CHARS)));
+    ft_putstr_fd(line, 1);
+    return (write2err_and_return(ERROR_MAP_CHARS, 4));
 }
+
 int is_a_valid_map_char(char c)
 {
     int ret;
@@ -85,16 +86,16 @@ int is_a_valid_map_char(char c)
     return (ret);
 }
 
-static int  sanatize_check(t_scene *scene)
-{
-    if (!scene->textures.north || !scene->textures.south || 
-        !scene->textures.west || !scene->textures.east)
-        return (write(2, ERROR_INVALID_TEXTURE, 
-                ft_strlen(ERROR_INVALID_TEXTURE)));
-    if (scene->floor.r == -1 || scene->floor.g == -1 || 
-        scene->floor.b == -1 || scene->ceiling.r == -1 || 
-        scene->ceiling.g == -1 || scene->ceiling.b == -1)
-        return (write(2, ERROR_INVALID_COLOR, 
-                ft_strlen(ERROR_INVALID_COLOR)));
-    return (0);
-}
+// static int  sanatize_check(t_scene *scene)
+// {
+//     if (!scene->textures.north || !scene->textures.south || 
+//         !scene->textures.west || !scene->textures.east)
+//         return (write(2, ERROR_INVALID_TEXTURE, 
+//                 ft_strlen(ERROR_INVALID_TEXTURE)));
+//     if (scene->floor.r == -1 || scene->floor.g == -1 || 
+//         scene->floor.b == -1 || scene->ceiling.r == -1 || 
+//         scene->ceiling.g == -1 || scene->ceiling.b == -1)
+//         return (write(2, ERROR_INVALID_COLOR, 
+//                 ft_strlen(ERROR_INVALID_COLOR)));
+//     return (0);
+// }

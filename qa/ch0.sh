@@ -24,7 +24,7 @@ Invalid characters in map"
 cd ../
 
 # 1. Build the project
-make
+make clean && make
 
 # 2. Test Area
 

@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 10:25:49 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 12:57:39 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,13 @@
 
 int	main(int argc, char *argv[])
 {
+	int		ret;
 	t_scene	maze;
 	
+	ret = 0;
 	if (argc != 2)
-		return (write(2, ERROR_INVALID_ARGS, ft_strlen(ERROR_INVALID_ARGS)));
-	parse_scene(argv[1], &maze);
+		return (write2err_and_return(ERROR_INVALID_ARGS, 1));
+	ret = parse_scene(argv[1], &maze);
 	free_heap(&maze);
-	return (0);
+	return (ret);
 }
