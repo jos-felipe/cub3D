@@ -4,11 +4,11 @@ NAME=cub3D
 ERR_FILE=/tmp/error.log
 
 ERROR_INVALID_ARGS="Error
-Invalid arguments. Try: ./cub3D with a map in format *.cub"
+Invalid arguments"
 ERROR_FILE_EXT="Error
-Invalid file extension. Must be .cub"
+Invalid file extension"
 ERROR_FILE_OPEN="Error
-Could not open the file"
+Could not open file"
 ERROR_INVALID_MAP="Error
 Map is not properly closed by walls"
 ERROR_INVALID_TEXTURE="Error
@@ -23,7 +23,7 @@ Invalid characters in map"
 # 0. Change to root directory
 cd ../
 
-# 1. Build the project
+# 1. Clean and Build the project
 make clean && make
 
 # 2. Test Area
