@@ -116,9 +116,24 @@ else
     echo "OK"
 fi
 
-# 6. Invalid color format
-echo "6. Invalid color format"
-./$NAME map_invalid_color.cub 2> $ERR_FILE
+# 6a. Invalid color format
+echo "6a. Invalid color format"
+./$NAME asset/map/misconfig/09-wrong_color_content.cub 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_INVALID_COLOR ]]; then
+    echo "KO"
+    echo "Actual:"
+    echo "$ERR"
+    echo "Expected:"
+    echo "$ERROR_INVALID_COLOR"
+    exit 1
+else
+    echo "OK"
+fi
+
+# 6b. Invalid color format
+echo "6b. Null color field"
+./$NAME asset/map/misconfig/09b-null_color_field.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_INVALID_COLOR ]]; then
     echo "KO"
