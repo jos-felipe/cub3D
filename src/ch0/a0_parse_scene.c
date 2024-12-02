@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 14:29:43 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 16:05:07 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int  init_scene(t_scene *scene);
 static int  process_line(char *line, t_scene *scene, int fd);
-// static int  sanatize_check(t_scene *scene);
+static int  sanity_check(t_scene *scene);
 
 int parse_scene(char *file_path, t_scene *scene)
 {
@@ -39,7 +39,6 @@ int parse_scene(char *file_path, t_scene *scene)
         line = get_next_line(fd);
     }
     close(fd);
-    // ret = sanatize_check(scene);
     return (ret);
 }
 
@@ -66,16 +65,22 @@ static int init_scene(t_scene *scene)
 
 static int process_line(char *line, t_scene *scene, int fd)
 {
+    int         ret;
     static int  map_started = 0;
     
+    ret = 0;
     if (!map_started && line[0] == '\n')
         return (0);
     if (ft_strchr("NSWE", line[0]))
         return (parse_textures(line, scene));
     if (ft_strchr("FC", line[0]))
         return (parse_colors(line, scene));
+    ret = sanity_check(scene);
+    if (ret)
+        return (ret);
     if (ft_strchr("1 ", line[0]))
     {
+        ft_putstr_fd(line, 1);
         map_started = 1;
         return (parse_map(fd, scene));
     }
@@ -93,16 +98,14 @@ int is_a_valid_map_char(char c)
     return (ret);
 }
 
-// static int  sanatize_check(t_scene *scene)
-// {
-//     if (!scene->textures.north || !scene->textures.south || 
-//         !scene->textures.west || !scene->textures.east)
-//         return (write(2, ERROR_INVALID_TEXTURE, 
-//                 ft_strlen(ERROR_INVALID_TEXTURE)));
-//     if (scene->floor.r == -1 || scene->floor.g == -1 || 
-//         scene->floor.b == -1 || scene->ceiling.r == -1 || 
-//         scene->ceiling.g == -1 || scene->ceiling.b == -1)
-//         return (write(2, ERROR_INVALID_COLOR, 
-//                 ft_strlen(ERROR_INVALID_COLOR)));
-//     return (0);
-// }
+static int  sanity_check(t_scene *scene)
+{
+    if (!scene->textures.north || !scene->textures.south || 
+        !scene->textures.west || !scene->textures.east)
+        return (write2err_and_return(INVALID_TEXTURE));
+    if (scene->floor.r == -1 || scene->floor.g == -1 || 
+        scene->floor.b == -1 || scene->ceiling.r == -1 || 
+        scene->ceiling.g == -1 || scene->ceiling.b == -1)
+        return (write2err_and_return(INVALID_COLOR));
+    return (0);
+}
