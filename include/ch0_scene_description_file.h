@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 13:08:09 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:28:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define ERROR_INVALID_TEXTURE "Error\nInvalid texture path\n"
 # define ERROR_INVALID_COLOR "Error\nInvalid color format\n"
 # define ERROR_INVALID_PLAYER "Error\nInvalid player position or multiple players\n"
-# define ERROR_MAP_CHARS "Error\nInvalid characters in map\n"
+# define ERROR_MAP_CHARS "Error\nInvalid map characters\n"
 
 typedef struct s_color
 {
@@ -61,6 +61,20 @@ typedef struct s_scene
     t_map       map;
 }   t_scene;
 
+typedef enum e_error     
+{
+    INVALID_ARGS = 1,
+    INVALID_FILE_EXT,
+    INVALID_FD,
+    INVALID_MAP,
+    INVALID_TEXTURE,
+    INVALID_COLOR,
+    INVALID_PLAYER,
+    INVALID_MAP_CHARS
+}   t_error;
+
+extern const char *g_error_messages[];
+
 int     check_file_extension(char *file_path);
 int     is_a_valid_map_char(char c);
 int     parse_textures(char *line, t_scene *scene);
@@ -69,7 +83,7 @@ int     parse_map(int fd, t_scene *scene);
 int     parse_scene(char *file_path, t_scene *scene);
 int     validate_map(t_map *map);
 int     write2err_and_2free(char *err_msg, char **ss1, char **ss2);
-int     write2err_and_return(char *err_msg, int ret);
+int     write2err_and_return(t_error code);
 int     free_heap(t_scene *scene);
 
 #endif
