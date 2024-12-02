@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 05:21:36 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 12:19:04 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 14:12:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,20 @@ int write2err_and_2free(char *err_msg, char **ss1, char **ss2)
     return (write(2, err_msg, ft_strlen(err_msg)));
 }
 
-int write2err_and_return(char *err_msg, int ret)
+int write2err_and_return(t_error code)
 {
-    write(2, err_msg, ft_strlen(err_msg));
-    return (ret);
+    ft_putstr_fd(g_error_messages[code], 2);
+    return (code);
 }
+
+const char *g_error_messages[] = {
+    "Success",
+    "Error\nInvalid arguments\n",
+    "Error\nInvalid file extension\n",
+    "Error\nCould not open file\n",
+    "Error\nInvalid map format\n",
+    "Error\nInvalid texture path\n",
+    "Error\nInvalid color format\n",
+    "Error\nInvalid player position or multiple players\n",
+    "Error\nInvalid map characters\n"
+};
