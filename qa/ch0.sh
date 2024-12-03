@@ -85,19 +85,18 @@ else
 	printf "OK\n"
 fi
 
-# 3. File open error
-echo "3. File open error"
-./$NAME non_existent_file.cub 2> $ERR_FILE
+printf "\nC1. Error file open: "
+./$NAME inexistent.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_FILE_OPEN ]]; then
-    echo "KO"
-    echo "Actual:"
-    echo "$ERR"
-    echo "Expected:"
-    echo "$ERROR_FILE_OPEN"
-    exit 1
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_FILE_OPEN"
+	exit 1
 else
-    echo "OK"
+	printf "OK\n"
 fi
 
 # 4. Invalid map format

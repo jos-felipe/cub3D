@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 22:28:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:30:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 int check_file_extension(char *file_path)
 {
-    size_t  len;
     char    *ext;
+    size_t  len;
 
     len = ft_strlen(file_path);
     if (len <= 4)
