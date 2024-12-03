@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a4_validate_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:27:49 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 23:58:23 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ int validate_map(t_map *map)
         j = -1;
         while (++j < map->width)
             if (process_map_char(map, i, j, &player_count))
-                return (write(2, ERROR_INVALID_MAP, 
-                        ft_strlen(ERROR_INVALID_MAP)));
+                return (write2err_and_return(INVALID_MAP_CHARS));
     }
     if (player_count != 1)
-        return (write(2, ERROR_INVALID_PLAYER, 
-                ft_strlen(ERROR_INVALID_PLAYER)));
+        return (write2err_and_return(INVALID_PLAYER));
     return (0);
 }
 

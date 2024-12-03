@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 21:57:51 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:06:02 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "../lib/libft/include/libft.h"
-
-# define ERROR_INVALID_ARGS "Error\nInvalid arguments. Try: ./cub3D with a map in format *.cub\n"
-# define ERROR_FILE_EXT "Error\nInvalid file extension. Must be .cub\n"
-# define ERROR_FILE_OPEN "Error\nCould not open the file\n"
-# define ERROR_INVALID_MAP "Error\nMap is not properly closed by walls\n"
-# define ERROR_INVALID_TEXTURE "Error\nInvalid texture path\n"
-# define ERROR_INVALID_COLOR "Error\nInvalid color format\n"
-# define ERROR_INVALID_PLAYER "Error\nInvalid player position or multiple players\n"
-# define ERROR_MAP_CHARS "Error\nInvalid map characters\n"
 
 typedef struct s_color
 {
@@ -69,7 +60,8 @@ typedef enum e_error
     INVALID_TEXTURE,
     INVALID_COLOR,
     INVALID_PLAYER,
-    INVALID_MAP_CHARS
+    INVALID_MAP_CHARS,
+    INVALID_MALLOC
 }   t_error;
 
 extern const char *g_error_messages[];
@@ -81,7 +73,9 @@ int     parse_colors(char *line, t_scene *scene);
 int     parse_map(int fd, t_scene *scene);
 int     parse_scene(char *file_path, t_scene *scene);
 int     validate_map(t_map *map);
-int     write2err_and_2free(char *err_msg, char **ss1, char **ss2);
+void    write2err(t_error code);
+int     write2err_and_free(t_error code, char **ss1, char **ss2, char *line);
+int     write2err_and_2free(t_error code, char **ss1, char **ss2);
 int     write2err_and_return(t_error code);
 int     free_heap(t_scene *scene);
 

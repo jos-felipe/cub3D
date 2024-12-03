@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 16:05:07 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:07:27 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int parse_scene(char *file_path, t_scene *scene)
     int     fd;
     int     ret;
 
-    ret = 0;
+    ret = INVALID_TEXTURE;
     init_scene(scene);
     if (check_file_extension(file_path))
-        return (write2err_and_return(INVALID_FILE_EXT));
+        return (INVALID_FILE_EXT);
     fd = open(file_path, O_RDONLY);
     if (fd < 0)
-        return (write2err_and_return(INVALID_FD));
+        return (INVALID_FD);
     line = get_next_line(fd);
     while (line)
     {

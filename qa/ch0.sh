@@ -99,19 +99,18 @@ else
 	printf "OK\n"
 fi
 
-# 4. Invalid map format
-echo "4. Invalid map format"
-./$NAME asset/map/misconfig/05-incomplete_map.cub 2> $ERR_FILE
+printf "\nD1. Empty file: "
+./$NAME asset/map/misconfig/D1_empty_file.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
-if [[ $ERR != $ERROR_INVALID_MAP ]]; then
-    echo "KO"
-    echo "Actual:"
-    echo "$ERR"
-    echo "Expected:"
-    echo "$ERROR_INVALID_MAP"
-    exit 1
+if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_TEXTURE"
+	exit 1
 else
-    echo "OK"
+	printf "OK\n"
 fi
 
 # 5.1 Invalid texture path

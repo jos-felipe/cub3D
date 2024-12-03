@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a3_parse_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:31:21 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 23:55:15 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,13 +29,10 @@ int parse_map(int fd, t_scene *scene)
     while (line)
     {
         if (!is_a_valid_map_line(line))
-        {
-            free(line);
-            return (write2err_and_2free(ERROR_MAP_CHARS, NULL, temp_map));
-        }
+            return (write2err_and_free(INVALID_MAP_CHARS, NULL, temp_map, line));
         temp_map = realloc_map(temp_map, ++height);
         if (!temp_map)
-            return (write2err_and_2free("MALLOC_ERROR", NULL, temp_map));
+            return (write2err_and_free(INVALID_MALLOC, NULL, temp_map, line));
         temp_map[height - 1] = line;
         line = get_next_line(fd);
     }

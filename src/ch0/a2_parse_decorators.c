@@ -6,13 +6,13 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 05:32:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 23:41:05 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
-static  int is_valid_color(t_color *color, char **rgb);
+static int  is_valid_color(t_color *color, char **rgb);
 
 int parse_textures(char *line, t_scene *scene)
 {
@@ -22,8 +22,7 @@ int parse_textures(char *line, t_scene *scene)
     ret = 0;
     split = ft_split(line, ' ');
     if (!split | !split[0] || !split[1])
-        ret = write(2, ERROR_INVALID_TEXTURE, 
-                ft_strlen(ERROR_INVALID_TEXTURE));
+        ret = INVALID_TEXTURE;
     else
     {
         if (ft_strncmp(split[0], "NO", 2) == 0)
@@ -35,8 +34,7 @@ int parse_textures(char *line, t_scene *scene)
         else if (ft_strncmp(split[0], "EA",2) == 0)
             scene->textures.east = ft_strdup(split[1]);
         else
-            ret = write(2, ERROR_INVALID_TEXTURE, 
-                ft_strlen(ERROR_INVALID_TEXTURE));
+            ret = INVALID_TEXTURE;
     }
     ft_free_split(split);
     return (ret);
@@ -50,16 +48,16 @@ int parse_colors(char *line, t_scene *scene)
 
     split = ft_split(line, ' ');
     if (!split || !split[0] || !split[1])
-        return (write2err_and_2free(ERROR_INVALID_COLOR, NULL, split));
+        return (write2err_and_2free(INVALID_COLOR, NULL, split));
     if (split[0][0] == 'F')
         color = &scene->floor;
     else
         color = &scene->ceiling;
     rgb = ft_split(split[1], ',');
     if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
-        return (write2err_and_2free(ERROR_INVALID_COLOR, rgb, split));
+        return (write2err_and_2free(INVALID_COLOR, rgb, split));
     if (!is_valid_color(color, rgb))
-        return (write2err_and_2free(ERROR_INVALID_COLOR, rgb, split));
+        return (write2err_and_2free(INVALID_COLOR, rgb, split));
     ft_free_split(rgb);
     ft_free_split(split);
     return (0);
