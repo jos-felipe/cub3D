@@ -26,34 +26,63 @@ cd ../
 # 1. Clean and Build the project
 make clean && make
 
-# 2. Test Area
+# 2. Test Arena
+printf "Chapter 0: Scene Description File\n\n" 
 
-echo "1. No arguments"
+printf "A1. Few arguments: "
 ./$NAME 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_INVALID_ARGS ]]; then
-	echo "KO"
+	printf "KO\n"
 	echo "Actual:"
 	echo "$ERR"
 	echo "Expected:"
 	echo "$ERROR_INVALID_ARGS"
 	exit 1
 else
-	echo "OK"
+    printf "OK\n"
 fi
 
-echo "2. Invalid file extension"
-./$NAME asset/map/misconfig/02-wrong_file_ext.cbb 2> $ERR_FILE
+printf "A2. Too many arguments: "
+./$NAME a b 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_INVALID_ARGS ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_ARGS"
+	exit 1
+else
+	printf "OK\n"
+fi
+
+printf "\nB1. Invalid file extension: "
+./$NAME map.exe 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_FILE_EXT ]]; then
-    echo "KO"
-    echo "Actual:"
-    echo "$ERR"
-    echo "Expected:"
-    echo "$ERROR_FILE_EXT"
-    exit 1
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_FILE_EXT"
+	exit 1
 else
-    echo "OK"
+	printf "OK\n"
+fi
+
+printf "B2. Invalid file path: "
+./$NAME .cub 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_FILE_EXT ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_FILE_EXT"
+	exit 1
+else
+	printf "OK\n"
 fi
 
 # 3. File open error
