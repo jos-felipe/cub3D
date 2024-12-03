@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 14:28:40 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 21:57:51 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "../lib/libft/include/libft.h"
-# include "../lib/libft/include/get_next_line_bonus.h"
 
 # define ERROR_INVALID_ARGS "Error\nInvalid arguments. Try: ./cub3D with a map in format *.cub\n"
 # define ERROR_FILE_EXT "Error\nInvalid file extension. Must be .cub\n"
