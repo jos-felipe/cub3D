@@ -113,6 +113,20 @@ else
 	printf "OK\n"
 fi
 
+printf "D2. Only new line: "
+./$NAME asset/map/misconfig/D2_only_new_line.cub 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_TEXTURE"
+	exit 1
+else
+	printf "OK\n"
+fi
+
 # 5.1 Invalid texture path
 echo "5a. Invalid texture path"
 ./$NAME asset/map/misconfig/08c-invalid_texture.cub 2> $ERR_FILE

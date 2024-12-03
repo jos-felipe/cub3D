@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/03 00:07:27 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:19:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ int parse_scene(char *file_path, t_scene *scene)
         line = get_next_line(fd);
     }
     close(fd);
+    ret = sanity_check(scene);
     return (ret);
 }
 
@@ -102,10 +103,10 @@ static int  sanity_check(t_scene *scene)
 {
     if (!scene->textures.north || !scene->textures.south || 
         !scene->textures.west || !scene->textures.east)
-        return (write2err_and_return(INVALID_TEXTURE));
+        return (INVALID_TEXTURE);
     if (scene->floor.r == -1 || scene->floor.g == -1 || 
         scene->floor.b == -1 || scene->ceiling.r == -1 || 
         scene->ceiling.g == -1 || scene->ceiling.b == -1)
-        return (write2err_and_return(INVALID_COLOR));
+        return (INVALID_COLOR);
     return (0);
 }
