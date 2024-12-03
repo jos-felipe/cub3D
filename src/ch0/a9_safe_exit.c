@@ -6,13 +6,13 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 05:21:36 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/03 00:04:49 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:11:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
-int free_heap(t_scene *scene)
+int free_scene(t_scene *scene)
 {
     free(scene->textures.north);
     free(scene->textures.south);

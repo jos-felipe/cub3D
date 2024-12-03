@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/03 00:06:02 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/03 00:11:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,6 @@ void    write2err(t_error code);
 int     write2err_and_free(t_error code, char **ss1, char **ss2, char *line);
 int     write2err_and_2free(t_error code, char **ss1, char **ss2);
 int     write2err_and_return(t_error code);
-int     free_heap(t_scene *scene);
+int     free_scene(t_scene *scene);
 
 #endif
