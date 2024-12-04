@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 05:21:36 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/03 00:11:40 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:00:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,7 @@ const char *g_error_messages[] = {
     "Error\nInvalid color format\n",
     "Error\nInvalid player position or multiple players\n",
     "Error\nInvalid map characters\n",
-    "Error\nInvalid malloc\n"
+    "Error\nInvalid malloc\n",
+    "Error\nInvalid identifier\n",
+    "Error\nUndefined error\n",
 };

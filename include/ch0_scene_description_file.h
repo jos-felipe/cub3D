@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/03 00:11:58 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/04 16:58:51 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ typedef struct s_scene
     t_map       map;
 }   t_scene;
 
-typedef enum e_error     
+typedef enum e_error
 {
     INVALID_ARGS = 1,
     INVALID_FILE_EXT,
@@ -61,7 +61,9 @@ typedef enum e_error
     INVALID_COLOR,
     INVALID_PLAYER,
     INVALID_MAP_CHARS,
-    INVALID_MALLOC
+    INVALID_MALLOC,
+    INVALID_IDENTIFIER,
+    UNDEFINED_ERROR
 }   t_error;
 
 extern const char *g_error_messages[];

@@ -1,7 +1,7 @@
 #!/bin/bash
 
 NAME=cub3D
-ERR_FILE=/tmp/error.log
+ERR_FILE=$(mktemp /tmp/error.XXXXXX.log)
 
 ERROR_INVALID_ARGS="Error
 Invalid arguments"
@@ -19,12 +19,20 @@ ERROR_INVALID_PLAYER="Error
 Invalid player position or multiple players"
 ERROR_MAP_CHARS="Error
 Invalid characters in map"
+ERROR_INVALID_IDENTIFIER="Error
+Invalid identifier"
+ERROR_UNDEFINED_ERROR="Error
+Undefined error"
 
 # 0. Change to root directory
 cd ../
 
 # 1. Build the project
 make
+if [ $? -ne 0 ]; then
+	echo "Build failed"
+	exit 1
+fi
 
 # 2. Test Arena
 printf "Chapter 0: Scene Description File\n\n" 
@@ -102,12 +110,12 @@ fi
 printf "\nD1. Empty file: "
 ./$NAME asset/map/misconfig/d1_empty_file.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
-if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
+if [[ $ERR != $ERROR_INVALID_IDENTIFIER ]]; then
 	printf "KO\n"
 	echo "Actual:"
 	echo "$ERR"
 	echo "Expected:"
-	echo "$ERROR_INVALID_TEXTURE"
+	echo "$ERROR_INVALID_IDENTIFIER"
 	exit 1
 else
 	printf "OK\n"
@@ -116,12 +124,26 @@ fi
 printf "D2. Only new line: "
 ./$NAME asset/map/misconfig/d2_only_new_line.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
-if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
+if [[ $ERR != $ERROR_UNDEFINED_ERROR ]]; then
 	printf "KO\n"
 	echo "Actual:"
 	echo "$ERR"
 	echo "Expected:"
-	echo "$ERROR_INVALID_TEXTURE"
+	echo "$ERROR_UNDEFINED_ERROR"
+	exit 1
+else
+	printf "OK\n"
+fi
+
+printf "D3. Invalid identifier: "
+./$NAME asset/map/misconfig/d3_invalid_identifier.cub 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_INVALID_IDENTIFIER ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_IDENTIFIER"
 	exit 1
 else
 	printf "OK\n"

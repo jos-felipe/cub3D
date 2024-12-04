@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/03 00:19:13 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/04 17:04:50 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int  init_scene(t_scene *scene);
 static int  process_line(char *line, t_scene *scene, int fd);
-static int  sanity_check(t_scene *scene);
+static int  completeness_check(t_scene *scene);
 
 int parse_scene(char *file_path, t_scene *scene)
 {
@@ -22,7 +22,7 @@ int parse_scene(char *file_path, t_scene *scene)
     int     fd;
     int     ret;
 
-    ret = INVALID_TEXTURE;
+    ret = INVALID_IDENTIFIER;
     init_scene(scene);
     if (check_file_extension(file_path))
         return (INVALID_FILE_EXT);
@@ -39,7 +39,8 @@ int parse_scene(char *file_path, t_scene *scene)
         line = get_next_line(fd);
     }
     close(fd);
-    ret = sanity_check(scene);
+    if (!ret)
+        ret = completeness_check(scene);
     return (ret);
 }
 
@@ -66,27 +67,20 @@ static int init_scene(t_scene *scene)
 
 static int process_line(char *line, t_scene *scene, int fd)
 {
-    int         ret;
     static int  map_started = 0;
     
-    ret = 0;
     if (!map_started && line[0] == '\n')
         return (0);
     if (ft_strchr("NSWE", line[0]))
         return (parse_textures(line, scene));
     if (ft_strchr("FC", line[0]))
         return (parse_colors(line, scene));
-    ret = sanity_check(scene);
-    if (ret)
-        return (ret);
     if (ft_strchr("1 ", line[0]))
     {
-        ft_putstr_fd(line, 1);
         map_started = 1;
         return (parse_map(fd, scene));
     }
-    ft_putstr_fd(line, 1);
-    return (write2err_and_return(INVALID_MAP_CHARS));
+    return (INVALID_IDENTIFIER);
 }
 
 int is_a_valid_map_char(char c)
@@ -99,14 +93,18 @@ int is_a_valid_map_char(char c)
     return (ret);
 }
 
-static int  sanity_check(t_scene *scene)
+static int  completeness_check(t_scene *scene)
 {
     if (!scene->textures.north || !scene->textures.south || 
         !scene->textures.west || !scene->textures.east)
-        return (INVALID_TEXTURE);
+        return (UNDEFINED_ERROR);
     if (scene->floor.r == -1 || scene->floor.g == -1 || 
         scene->floor.b == -1 || scene->ceiling.r == -1 || 
         scene->ceiling.g == -1 || scene->ceiling.b == -1)
-        return (INVALID_COLOR);
+        return (UNDEFINED_ERROR);
+    if (!scene->map.grid || scene->map.width == 0 || 
+        scene->map.height == 0 || scene->map.player_x == -1 || 
+        scene->map.player_y == -1 || scene->map.player_dir == '\0')
+        return (UNDEFINED_ERROR);
     return (0);
 }
