@@ -23,8 +23,8 @@ Invalid characters in map"
 # 0. Change to root directory
 cd ../
 
-# 1. Clean and Build the project
-make clean && make
+# 1. Build the project
+make
 
 # 2. Test Arena
 printf "Chapter 0: Scene Description File\n\n" 
@@ -100,7 +100,7 @@ else
 fi
 
 printf "\nD1. Empty file: "
-./$NAME asset/map/misconfig/D1_empty_file.cub 2> $ERR_FILE
+./$NAME asset/map/misconfig/d1_empty_file.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
 	printf "KO\n"
@@ -114,7 +114,7 @@ else
 fi
 
 printf "D2. Only new line: "
-./$NAME asset/map/misconfig/D2_only_new_line.cub 2> $ERR_FILE
+./$NAME asset/map/misconfig/d2_only_new_line.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
 	printf "KO\n"

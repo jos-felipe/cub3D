@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/12/02 05:39:52 by josfelip         ###   ########.fr        #
+#    Updated: 2024/12/04 16:16:22 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,9 +17,9 @@ NAME = ${PROJECT_NAME}
 ARGS = maze.cub
 
 # Compiler directives
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-DFLAGS = -g3
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror
+DFLAGS	= -g3
 
 # Directory structure
 SRC_DIR		= src
@@ -50,6 +50,12 @@ SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
 # Generate object file paths, maintaining directory structure
 OBJ	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
+# Chapter header files
+HDR_CH = ch0_scene_description_file.h
+
+# Combine all headers with their paths
+HDR	= $(addprefix $(INC_DIR)/, $(HDR_CH))
+
 # Libraries
 LIBFT = $(LIBFT_DIR)/libft.a
 
@@ -70,7 +76,8 @@ $(LIBFT):
 	@make -C ${LIBFT_DIR} --no-print-directory
 	
 # Compile source files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
