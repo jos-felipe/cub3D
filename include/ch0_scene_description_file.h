@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 12:27:02 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:12:01 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,7 +77,6 @@ int     parse_scene(char *file_path, t_scene *scene);
 int     validate_map(t_map *map);
 void    write2err(t_error code, t_scene *maze);
 int     write2err_and_free(t_error code, char **ss1, char **ss2, char *line);
-int     free2split_and_return(t_error code, char **ss1, char **ss2);
 int     write2err_and_2free(t_error code, char **ss1, char **ss2);
 int     write2err_and_return(t_error code);
 int     free_scene(t_scene *scene);

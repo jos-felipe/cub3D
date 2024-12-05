@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 05:21:36 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 12:28:46 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:11:20 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,6 @@ int write2err_and_free(t_error code, char **ss1, char **ss2, char *line)
     ft_free_split(ss2);
     free(line);
     return (write2err_and_return(code));
-}
-
-int free2split_and_return(t_error code, char **ss1, char **ss2)
-{
-    ft_free_split(ss1);
-    ft_free_split(ss2);
-    return (code);
 }
 
 int write2err_and_return(t_error code)

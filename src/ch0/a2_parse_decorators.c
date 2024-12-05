@@ -6,36 +6,39 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 12:11:19 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/05 15:14:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
 static int  is_valid_color(t_color *color, char **rgb);
+static char *validate_path(char *path);
+static int  free2split_and_return(t_error code, char **ss1, char **ss2);
 
 int parse_textures(char *line, t_scene *scene)
 {
+    char    *path;
     char    **split;
     int     ret;
 
     ret = 0;
     split = ft_split(line, ' ');
     if (!split | !split[0] || !split[1])
-        ret = INVALID_TEXTURE;
+        return(free2split_and_return(INVALID_TEXTURE, split, NULL));
+    path = validate_path(split[1]);
+    if (!path)
+        return(free2split_and_return(INVALID_TEXTURE, split, NULL));
+    if (ft_strncmp(split[0], "NO", 2) == 0)
+        scene->textures.north = path;
+    else if (ft_strncmp(split[0], "SO",2) == 0)
+        scene->textures.south = path;
+    else if (ft_strncmp(split[0], "WE",2) == 0)
+        scene->textures.west = path;
+    else if (ft_strncmp(split[0], "EA",2) == 0)
+        scene->textures.east = path;
     else
-    {
-        if (ft_strncmp(split[0], "NO", 2) == 0)
-            scene->textures.north = ft_strdup(split[1]);
-        else if (ft_strncmp(split[0], "SO",2) == 0)
-            scene->textures.south = ft_strdup(split[1]);
-        else if (ft_strncmp(split[0], "WE",2) == 0)
-            scene->textures.west = ft_strdup(split[1]);
-        else if (ft_strncmp(split[0], "EA",2) == 0)
-            scene->textures.east = ft_strdup(split[1]);
-        else
-            ret = INVALID_TEXTURE;
-    }
+        ret = INVALID_TEXTURE;
     ft_free_split(split);
     return (ret);
 }
@@ -63,6 +66,13 @@ int parse_colors(char *line, t_scene *scene)
     return (0);
 }
 
+static char *validate_path(char *path)
+{
+    if (access(path, R_OK))
+        return (NULL);
+    return (ft_strdup(path));
+}
+
 static  int is_valid_color(t_color *color, char **rgb)
 {
     int r;
@@ -78,4 +88,11 @@ static  int is_valid_color(t_color *color, char **rgb)
     color->g = g;
     color->b = b;
     return (1);
+}
+
+static int free2split_and_return(t_error code, char **ss1, char **ss2)
+{
+    ft_free_split(ss1);
+    ft_free_split(ss2);
+    return (code);
 }
