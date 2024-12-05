@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 11:46:34 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:11:19 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,16 @@ int parse_colors(char *line, t_scene *scene)
 
     split = ft_split(line, ' ');
     if (!split || !split[0] || !split[1])
-        return (write2err_and_2free(INVALID_COLOR, NULL, split));
+        return (free2split_and_return(INVALID_COLOR, split, NULL));
     if (split[0][0] == 'F')
         color = &scene->floor;
     else
         color = &scene->ceiling;
     rgb = ft_split(split[1], ',');
     if (!rgb || !rgb[0] || !rgb[1] || !rgb[2])
-        return (write2err_and_2free(INVALID_COLOR, rgb, split));
+        return (free2split_and_return(INVALID_COLOR, rgb, split));
     if (!is_valid_color(color, rgb))
-        return (write2err_and_2free(INVALID_COLOR, rgb, split));
+        return (free2split_and_return(INVALID_COLOR, rgb, split));
     ft_free_split(rgb);
     ft_free_split(split);
     return (0);
