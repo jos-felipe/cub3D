@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 05:21:36 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 12:06:26 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/05 12:28:46 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,12 @@ int write2err_and_return(t_error code)
     return (code);
 }
 
-void write2err(t_error code)
+void write2err(t_error code, t_scene *maze)
 {
     if (code)
         ft_putstr_fd(g_error_messages[code], 2);
+    if (code == UNDEFINED_ERROR)
+        debug_scene(maze);
 }
 
 const char *g_error_messages[] = {

@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/12/04 16:16:22 by josfelip         ###   ########.fr        #
+#    Updated: 2024/12/05 12:23:58 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,7 +41,8 @@ SRC_CH0		=	ch0/a0_parse_scene.c \
 		  		ch0/a2_parse_decorators.c \
 		  		ch0/a3_parse_map.c \
 		  		ch0/a4_validate_map.c \
-				ch0/a9_safe_exit.c
+				ch0/a9_safe_exit.c \
+				ch0/a5_debug_scene.c \
 
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \

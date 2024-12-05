@@ -191,6 +191,20 @@ else
 	printf "OK\n"
 fi
 
+printf "F2. Invalid color: "
+./$NAME asset/map/misconfig/f2_invalid_color.cub 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_INVALID_COLOR ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_COLOR"
+	exit 1
+else
+	printf "OK\n"
+fi
+
 # 5.1 Invalid texture path
 echo "5a. Invalid texture path"
 ./$NAME asset/map/misconfig/08c-invalid_texture.cub 2> $ERR_FILE
