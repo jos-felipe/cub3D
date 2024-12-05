@@ -149,8 +149,22 @@ else
 	printf "OK\n"
 fi
 
-printf "E1. Invalid texture: "
+printf "\nE1. Invalid texture: "
 ./$NAME asset/map/misconfig/e1_invalid_texture.cub 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_TEXTURE"
+	exit 1
+else
+	printf "OK\n"
+fi
+
+printf "E2. Null texture: "
+./$NAME asset/map/misconfig/e2_null_texture.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
 if [[ $ERR != $ERROR_INVALID_TEXTURE ]]; then
 	printf "KO\n"
