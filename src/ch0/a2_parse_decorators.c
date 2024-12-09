@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 15:14:59 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/09 13:21:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,9 +68,15 @@ int parse_colors(char *line, t_scene *scene)
 
 static char *validate_path(char *path)
 {
-    if (access(path, R_OK))
+    char    *trimmed;
+
+    trimmed = ft_strtrim(path, "\t\n\v\f\r ");
+    if (access(trimmed, R_OK))
+    {
+        free(trimmed);
         return (NULL);
-    return (ft_strdup(path));
+    }
+    return (trimmed);
 }
 
 static  int is_valid_color(t_color *color, char **rgb)

@@ -1,7 +1,17 @@
 #!/bin/bash
 
+# Chapter 0: Scene Description File
+
 NAME=cub3D
-ERR_FILE=$(mktemp /tmp/error.XXXXXX.log)
+
+ERR_FILE=$(mktemp /tmp/$NAME.XXXXXX) || {
+    echo "Failed to create temporary file"
+    exit 1
+}
+if [ ! -w "$ERR_FILE" ]; then
+    echo "Temporary file is not writable"
+    exit 1
+fi
 
 ERROR_INVALID_ARGS="Error
 Invalid arguments"
@@ -35,7 +45,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # 2. Test Arena
-printf "Chapter 0: Scene Description File\n\n" 
+printf "\n\nChapter 0: Scene Description File\n\n" 
 
 printf "A1. Few arguments: "
 ./$NAME 2> $ERR_FILE
@@ -191,6 +201,20 @@ else
 	printf "OK\n"
 fi
 
+printf "E4. Multiple textures: "
+./$NAME asset/map/misconfig/e4_texture_multiple.cub 2> $ERR_FILE
+ERR=$(cat $ERR_FILE)
+if [[ $ERR != $ERROR_UNDEFINED_ERROR ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_UNDEFINED_ERROR"
+	exit 1
+else
+	printf "OK\n"
+fi
+
 printf "\nF1. Null color: "
 ./$NAME asset/map/misconfig/f1_null_color.cub 2> $ERR_FILE
 ERR=$(cat $ERR_FILE)
@@ -309,6 +333,6 @@ else
     echo "OK"
 fi
 
-exit 0
+rm -f "$ERR_FILE"
 
 exit 0
