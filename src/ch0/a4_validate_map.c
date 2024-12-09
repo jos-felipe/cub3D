@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/02 23:58:23 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:10:00 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int validate_map(t_map *map)
                 return (write2err_and_return(INVALID_MAP_CHARS));
     }
     if (player_count != 1)
-        return (write2err_and_return(INVALID_PLAYER));
+        return (INVALID_PLAYER);
     return (0);
 }
 
@@ -75,4 +75,11 @@ static int process_map_char(t_map *map, int i, int j, int *player_count)
         }
     }
     return (0);
+}
+
+int free_and_return(t_error code, char *s, char **ss)
+{
+    free(s);
+    ft_free_split(ss);
+    return (code);
 }

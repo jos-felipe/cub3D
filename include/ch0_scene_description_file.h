@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 15:12:01 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:33:05 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,16 +69,14 @@ typedef enum e_error
 extern const char *g_error_messages[];
 
 int     check_file_extension(char *file_path);
-int     is_a_valid_map_char(char c);
 int     parse_textures(char *line, t_scene *scene);
 int     parse_colors(char *line, t_scene *scene);
-int     parse_map(int fd, t_scene *scene);
+int     parse_map(int fd, char *line, t_scene *scene);
 int     parse_scene(char *file_path, t_scene *scene);
 int     validate_map(t_map *map);
 void    write2err(t_error code, t_scene *maze);
-int     write2err_and_free(t_error code, char **ss1, char **ss2, char *line);
-int     write2err_and_2free(t_error code, char **ss1, char **ss2);
 int     write2err_and_return(t_error code);
+int     free_and_return(t_error code, char *s, char **ss);
 int     free_scene(t_scene *scene);
 void    debug_scene(t_scene *scene);
 

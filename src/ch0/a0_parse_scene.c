@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/04 17:04:50 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:33:27 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,19 +78,9 @@ static int process_line(char *line, t_scene *scene, int fd)
     if (ft_strchr("1 ", line[0]))
     {
         map_started = 1;
-        return (parse_map(fd, scene));
+        return (parse_map(fd, line, scene));
     }
     return (INVALID_IDENTIFIER);
-}
-
-int is_a_valid_map_char(char c)
-{
-    int ret;
-
-    ret = 0;
-    if (ft_strchr("0NSEW1 ", c))
-        ret = 1;
-    return (ret);
 }
 
 static int  completeness_check(t_scene *scene)
