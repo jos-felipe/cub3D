@@ -4,7 +4,7 @@
 
 NAME="cub3D"
 
-LOG_FILE=$(mktemp /tmp/$LEAKS_$NAME.XXXXXX) || {
+LOG_FILE=$(mktemp /tmp/$LEAKS.XXXXXX) || {
     echo "Failed to create temporary file"
     exit 1
 }
@@ -139,129 +139,102 @@ else
 fi
 
 printf "\nE1. Invalid texture: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/e1_invalid_texture.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/e1_invalid_texture.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_TEXTURE ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_TEXTURE"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "E2. Null texture: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/e2_null_texture.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/e2_null_texture.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_TEXTURE ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_TEXTURE"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "E3. Inexistent texture: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/e3_inexistent_texture.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/e3_inexistent_texture.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_TEXTURE ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_TEXTURE"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "E4. Multiple textures: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/e4_texture_multiple.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/e4_texture_multiple.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_UNDEFINED_ERROR ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_UNDEFINED_ERROR"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "\nF1. Null color: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/f1_null_color.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/f1_null_color.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_COLOR ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_COLOR"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "F2. Invalid color: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/f2_invalid_color.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/f2_invalid_color.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_COLOR ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_COLOR"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "F3. Multiple colors: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/f3_color_multiple.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/f3_color_multiple.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_UNDEFINED_ERROR ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_UNDEFINED_ERROR"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "\nG1. Invalid map format: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/g1_map_invalid_format.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/g1_map_invalid_format.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_MAP ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_MAP"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "G2. Valid minimalist map: "
-$LEAKS $LFLAGS ./$NAME asset/map/g2_map_minimalist.cub
+$LEAKS $LFLAGS ./$NAME asset/map/g2_map_minimalist.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != "" ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo ""
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 rm -f "$LOG_FILE"
