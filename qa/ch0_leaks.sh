@@ -62,101 +62,80 @@ else
 fi
 
 printf "A2. Too many arguments: "
-$LEAKS $LFLAGS ./$NAME a b
+$LEAKS $LFLAGS ./$NAME a b 2>/dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_ARGS ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_ARGS"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "\nB1. Invalid file extension: "
-$LEAKS $LFLAGS ./$NAME map.exe
+$LEAKS $LFLAGS ./$NAME map.exe 2>/dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_FILE_EXT ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_FILE_EXT"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "B2. Invalid file path: "
-$LEAKS $LFLAGS ./$NAME .cub
+$LEAKS $LFLAGS ./$NAME .cub 2>/dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_FILE_EXT ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_FILE_EXT"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "\nC1. Error file open: "
-$LEAKS $LFLAGS ./$NAME inexistent.cub
+$LEAKS $LFLAGS ./$NAME inexistent.cub 2>/dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_FILE_OPEN ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_FILE_OPEN"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "\nD1. Empty file: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/d1_empty_file.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/d1_empty_file.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_IDENTIFIER ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_IDENTIFIER"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "D2. Only new line: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/d2_only_new_line.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/d2_only_new_line.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_UNDEFINED_ERROR ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_UNDEFINED_ERROR"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "D3. Invalid identifier: "
-$LEAKS $LFLAGS ./$NAME asset/map/misconfig/d3_invalid_identifier.cub
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/d3_invalid_identifier.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
-if [[ $LOG != $ERROR_INVALID_IDENTIFIER ]]; then
-	printf "KO\n"
-	echo "Actual:"
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
 	echo "$LOG"
-	echo "Expected:"
-	echo "$ERROR_INVALID_IDENTIFIER"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
 printf "\nE1. Invalid texture: "
