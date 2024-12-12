@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/12 11:55:58 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/12 17:36:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ static  int get_max_width(char **map);
 int parse_map(int fd, char *line, t_scene *scene)
 {
     char    *trimmed;
+    char    *temp_line;
     char    **temp_map;
     int     height;
     
@@ -34,7 +35,9 @@ int parse_map(int fd, char *line, t_scene *scene)
         if (!temp_map)
             return (free_and_return(INVALID_MALLOC, trimmed, temp_map));
         temp_map[height - 1] = trimmed;
-        trimmed = ft_strtrim(get_next_line(fd), "\n");
+        temp_line = get_next_line(fd);
+        trimmed = ft_strtrim(temp_line, "\n");
+        free(temp_line);
     }
     scene->map.height = height;
     scene->map.width = get_max_width(temp_map);
