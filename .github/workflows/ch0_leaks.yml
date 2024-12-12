@@ -1,4 +1,4 @@
-name: Chapter 0 - Leaks
+name: Chapter 0
 
 on:
   push:
@@ -9,10 +9,10 @@ on:
 jobs:
   valgrind:
     runs-on: ubuntu-latest
-    name: Chapter 0 - Leaks
+    name: Leaks
     steps:
     - uses: actions/checkout@v2
     - name: 42valgrind Leak checker
       uses: solareenlo/42valgrind-action@v1.0.3
       with:
-        flags: './qa/ch0_leaks.sh'
+        flags: 'cd ./qa && ./ch0_leaks.sh'

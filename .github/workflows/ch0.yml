@@ -10,7 +10,7 @@ on:
 jobs:
   global_job:
     runs-on: ubuntu-latest
-    name: Chapter 0
+    name: Functional
     steps:
     - uses: actions/checkout@v3
-    - run: ./qa/ch0.sh
+    - run: cd ./qa && ./ch0.sh
