@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:27:49 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:18:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int validate_map(t_map *map)
     int player_count;
 
     if (map->grid == NULL)
-        return(write(2, "MALLOC_ERROR", ft_strlen("MALLOC_ERROR")));
+        return (INVALID_MALLOC);
     player_count = 0;
     i = -1;
     while (++i < map->height)
@@ -30,12 +30,10 @@ int validate_map(t_map *map)
         j = -1;
         while (++j < map->width)
             if (process_map_char(map, i, j, &player_count))
-                return (write(2, ERROR_INVALID_MAP, 
-                        ft_strlen(ERROR_INVALID_MAP)));
+                return (INVALID_MAP);
     }
     if (player_count != 1)
-        return (write(2, ERROR_INVALID_PLAYER, 
-                ft_strlen(ERROR_INVALID_PLAYER)));
+        return (INVALID_PLAYER);
     return (0);
 }
 
@@ -77,4 +75,11 @@ static int process_map_char(t_map *map, int i, int j, int *player_count)
         }
     }
     return (0);
+}
+
+int free_and_return(t_error code, char *s, char **ss)
+{
+    free(s);
+    ft_free_split(ss);
+    return (code);
 }

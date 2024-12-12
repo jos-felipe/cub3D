@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:31:21 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:55:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,27 +17,24 @@ static char **realloc_map(char **map, int height);
 static  int is_a_valid_map_line(char *line);
 static  int get_max_width(char **map);
 
-int parse_map(int fd, t_scene *scene)
+int parse_map(int fd, char *line, t_scene *scene)
 {
-    char *line;
-    char **temp_map;
-    int height;
+    char    *trimmed;
+    char    **temp_map;
+    int     height;
     
     height = 0;
     temp_map = ft_calloc(1, sizeof(char *));
-    line = get_next_line(fd);
-    while (line)
+    trimmed = ft_strtrim(line, "\n");
+    while (trimmed)
     {
-        if (!is_a_valid_map_line(line))
-        {
-            free(line);
-            return (write2err_and_2free(ERROR_MAP_CHARS, NULL, temp_map));
-        }
+        if (!is_a_valid_map_line(trimmed))
+            return (free_and_return(INVALID_MAP_CHARS, trimmed, temp_map));
         temp_map = realloc_map(temp_map, ++height);
         if (!temp_map)
-            return (write2err_and_2free("MALLOC_ERROR", NULL, temp_map));
-        temp_map[height - 1] = line;
-        line = get_next_line(fd);
+            return (free_and_return(INVALID_MALLOC, trimmed, temp_map));
+        temp_map[height - 1] = trimmed;
+        trimmed = ft_strtrim(get_next_line(fd), "\n");
     }
     scene->map.height = height;
     scene->map.width = get_max_width(temp_map);
@@ -53,8 +50,11 @@ static int    is_a_valid_map_line(char *line)
     i = 0;
     while (line[i])
     {
-        if (!is_a_valid_map_char(line[i]))
+        if (!ft_strchr("0NSEW1 ", line[i]))
+        {
+            ft_printf("Invalid character in map: %c\n", line[i]);
             return (0);
+        }
         i++;
     }
     return (1);

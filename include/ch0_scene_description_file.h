@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ch0_scene_description_file.h                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 11:25:28 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/09 19:33:05 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,6 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "../lib/libft/include/libft.h"
-# include "../lib/libft/include/get_next_line_bonus.h"
-
-# define ERROR_FILE_EXT "Error\nInvalid file extension. Must be .cub\n"
-# define ERROR_FILE_OPEN "Error\nCould not open the file\n"
-# define ERROR_INVALID_MAP "Error\nMap is not properly closed by walls\n"
-# define ERROR_INVALID_TEXTURE "Error\nInvalid texture path\n"
-# define ERROR_INVALID_COLOR "Error\nInvalid color format\n"
-# define ERROR_INVALID_PLAYER "Error\nInvalid player position or multiple players\n"
-# define ERROR_MAP_CHARS "Error\nInvalid characters in map\n"
 
 typedef struct s_color
 {
@@ -60,13 +51,33 @@ typedef struct s_scene
     t_map       map;
 }   t_scene;
 
+typedef enum e_error
+{
+    INVALID_ARGS = 1,
+    INVALID_FILE_EXT,
+    INVALID_FD,
+    INVALID_MAP,
+    INVALID_TEXTURE,
+    INVALID_COLOR,
+    INVALID_PLAYER,
+    INVALID_MAP_CHARS,
+    INVALID_MALLOC,
+    INVALID_IDENTIFIER,
+    UNDEFINED_ERROR
+}   t_error;
+
+extern const char *g_error_messages[];
+
 int     check_file_extension(char *file_path);
-int     is_a_valid_map_char(char c);
 int     parse_textures(char *line, t_scene *scene);
 int     parse_colors(char *line, t_scene *scene);
-int     parse_map(int fd, t_scene *scene);
+int     parse_map(int fd, char *line, t_scene *scene);
 int     parse_scene(char *file_path, t_scene *scene);
 int     validate_map(t_map *map);
-int     write2err_and_2free(char *err_msg, char **ss1, char **ss2);
+void    write2err(t_error code, t_scene *maze);
+int     write2err_and_return(t_error code);
+int     free_and_return(t_error code, char *s, char **ss);
+int     free_scene(t_scene *scene);
+void    debug_scene(t_scene *scene);
 
 #endif

@@ -1,0 +1,6 @@
+EA ./asset/texture/south.png
+WE ./asset/texture/south.png
+SO ./asset/texture/south.png
+NO ./asset/texture/north.png
+
+F 220,100,256

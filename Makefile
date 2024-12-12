@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/11/28 15:26:35 by josfelip         ###   ########.fr        #
+#    Updated: 2024/12/12 12:59:05 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,12 +14,12 @@ PROJECT_NAME = cub3D
 
 # Target executable
 NAME = ${PROJECT_NAME}
-ARGS = maze.cub
+ARGS =
 
 # Compiler directives
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-DFLAGS = -g3
+CC		= cc
+CFLAGS	= -Wall -Wextra -Werror
+DFLAGS	= -g3
 
 # Directory structure
 SRC_DIR		= src
@@ -35,8 +35,14 @@ ifdef WITH_DEBUG
 endif
 
 # Source files by component
-SRC_MAIN = main.c
-SRC_CH0 = ch0_scene_description_file/a0_parse_scene.c ch0_scene_description_file/a1_check_file_extension.c ch0_scene_description_file/a2_parse_decorators.c ch0_scene_description_file/a3_parse_map.c ch0_scene_description_file/a4_validate_map.c
+SRC_MAIN	=	main.c
+SRC_CH0		=	ch0/a0_parse_scene.c \
+				ch0/a1_check_file_extension.c \
+		  		ch0/a2_parse_decorators.c \
+		  		ch0/a3_parse_map.c \
+		  		ch0/a4_validate_map.c \
+				ch0/a9_safe_exit.c \
+				ch0/a5_debug_scene.c \
 
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
@@ -44,6 +50,12 @@ SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
 
 # Generate object file paths, maintaining directory structure
 OBJ	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
+
+# Chapter header files
+HDR_CH = ch0_scene_description_file.h
+
+# Combine all headers with their paths
+HDR	= $(addprefix $(INC_DIR)/, $(HDR_CH))
 
 # Libraries
 LIBFT = $(LIBFT_DIR)/libft.a
@@ -65,7 +77,8 @@ $(LIBFT):
 	@make -C ${LIBFT_DIR} --no-print-directory
 	
 # Compile source files
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
+# $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	

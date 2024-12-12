@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 12:27:46 by josfelip         ###   ########.fr       */
+/*   Created: 2023/08/24 13:54:25 by josfelip          #+#    #+#             */
+/*   Updated: 2023/09/01 16:29:10 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-#include "../lib/libft/include/libft.h"
-#include "../include/ch0_scene_description_file.h"
+#ifndef FT_PRINTF_H
+# define FT_PRINTF_H
 
-int	main(int argc, char *argv[])
-{
-	int		ret;
-	t_scene	maze;
-	
-	if (argc != 2)
-		return (write2err_and_return(INVALID_ARGS));
-	ret = parse_scene(argv[1], &maze);
-	write2err(ret, &maze);
-	free_scene(&maze);
-	return (ret);
-}
+# include <unistd.h>
+# include <stdarg.h>
+
+int	ft_printf(const char *str, ...);
+int	ft_putchar(char c);
+int	ft_putstr(char *str);
+int	ft_putnbr(int n, int prefix_flag);
+int	ft_putunbr(unsigned int nbr);
+int	ft_puthex(unsigned long int hex, int case_flag, int prefix_flag);
+int	ft_putptr(void *ptr);
+
+#endif

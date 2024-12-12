@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a1_check_file_extension.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/11/28 15:31:35 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/02 22:30:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,11 @@
 
 int check_file_extension(char *file_path)
 {
-    size_t  len;
     char    *ext;
+    size_t  len;
 
-    if (!file_path)
-        return (1);
     len = ft_strlen(file_path);
-    if (len < 4)
+    if (len <= 4)
         return (1);
     ext = file_path + len - 4;
     return (ft_strncmp(ext, ".cub", 4));
