@@ -271,6 +271,20 @@ else
 	printf "OK\n"
 fi
 
+printf "G2. Valid minimalist map: "
+./$NAME asset/map/g2_map_minimalist.cub 2> "$ERR_FILE"
+ERR=$(cat "$ERR_FILE")
+if [[ $ERR != "" ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo ""
+	exit 1
+else
+	printf "OK\n"
+fi
+
 rm -f "$ERR_FILE"
 
 exit 0
