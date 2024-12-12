@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a2_parse_decorators.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/09 13:21:48 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:56:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ static char *validate_path(char *path)
 {
     char    *trimmed;
 
-    trimmed = ft_strtrim(path, "\t\n\v\f\r ");
+    trimmed = ft_strtrim(path, "\n");
     if (access(trimmed, R_OK))
     {
         free(trimmed);

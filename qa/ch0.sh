@@ -20,7 +20,7 @@ Invalid file extension"
 ERROR_FILE_OPEN="Error
 Could not open file"
 ERROR_INVALID_MAP="Error
-Map is not properly closed by walls"
+Invalid map format"
 ERROR_INVALID_TEXTURE="Error
 Invalid texture path"
 ERROR_INVALID_COLOR="Error
@@ -257,15 +257,15 @@ else
 	printf "OK\n"
 fi
 
-printf "\nG1. Invalid player: "
-./$NAME asset/map/misconfig/g1_map_invalid_player.cub 2> "$ERR_FILE"
+printf "\nG1. Invalid map format: "
+./$NAME asset/map/misconfig/g1_map_invalid_format.cub 2> "$ERR_FILE"
 ERR=$(cat "$ERR_FILE")
-if [[ $ERR != $ERROR_INVALID_PLAYER ]]; then
+if [[ $ERR != $ERROR_INVALID_MAP ]]; then
 	printf "KO\n"
 	echo "Actual:"
 	echo "$ERR"
 	echo "Expected:"
-	echo "$ERROR_INVALID_PLAYER"
+	echo "$ERROR_INVALID_MAP"
 	exit 1
 else
 	printf "OK\n"

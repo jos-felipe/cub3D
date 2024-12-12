@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a3_parse_map.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/09 19:27:36 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/12 11:55:58 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int parse_map(int fd, char *line, t_scene *scene)
     
     height = 0;
     temp_map = ft_calloc(1, sizeof(char *));
-    trimmed = ft_strtrim(line, "\t\n\v\f\r ");
+    trimmed = ft_strtrim(line, "\n");
     while (trimmed)
     {
         if (!is_a_valid_map_line(trimmed))
@@ -34,7 +34,7 @@ int parse_map(int fd, char *line, t_scene *scene)
         if (!temp_map)
             return (free_and_return(INVALID_MALLOC, trimmed, temp_map));
         temp_map[height - 1] = trimmed;
-        trimmed = ft_strtrim(get_next_line(fd), "\t\n\v\f\r ");
+        trimmed = ft_strtrim(get_next_line(fd), "\n");
     }
     scene->map.height = height;
     scene->map.width = get_max_width(temp_map);

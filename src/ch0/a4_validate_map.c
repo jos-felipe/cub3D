@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a4_validate_map.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/09 19:10:00 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:18:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int validate_map(t_map *map)
     int player_count;
 
     if (map->grid == NULL)
-        return(write(2, "MALLOC_ERROR", ft_strlen("MALLOC_ERROR")));
+        return (INVALID_MALLOC);
     player_count = 0;
     i = -1;
     while (++i < map->height)
@@ -30,7 +30,7 @@ int validate_map(t_map *map)
         j = -1;
         while (++j < map->width)
             if (process_map_char(map, i, j, &player_count))
-                return (write2err_and_return(INVALID_MAP_CHARS));
+                return (INVALID_MAP);
     }
     if (player_count != 1)
         return (INVALID_PLAYER);
