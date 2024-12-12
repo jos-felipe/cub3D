@@ -1,4 +1,4 @@
-name: leaks
+name: Chapter 0 - Leaks
 
 on:
   push:
@@ -9,10 +9,10 @@ on:
 jobs:
   valgrind:
     runs-on: ubuntu-latest
-    name: 42valgrind
+    name: Chapter 0 - Leaks
     steps:
     - uses: actions/checkout@v2
     - name: 42valgrind Leak checker
       uses: solareenlo/42valgrind-action@v1.0.3
       with:
-        flags: 'make faultcheck && make memcheck'
+        flags: './qa/ch0_leaks.sh'
