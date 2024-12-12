@@ -1,0 +1,16 @@
+name: Chapter 0
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+
+jobs:
+  global_job:
+    runs-on: ubuntu-latest
+    name: Functional
+    steps:
+    - uses: actions/checkout@v3
+    - run: cd ./qa && ./ch0.sh
