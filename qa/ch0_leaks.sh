@@ -237,6 +237,28 @@ else
     printf "MOK\n"
 fi
 
+printf "\nH1. No player: "
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/h1_player_zero.cub &> /dev/null
+LOG=$(cat "$LOG_FILE")
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
+	echo "$LOG"
+	exit 1
+else
+    printf "MOK\n"
+fi
+
+printf "H2. Multiple players: "
+$LEAKS $LFLAGS ./$NAME asset/map/misconfig/h2_player_multiple.cub &> /dev/null
+LOG=$(cat "$LOG_FILE")
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
+	echo "$LOG"
+	exit 1
+else
+    printf "MOK\n"
+fi
+
 rm -f "$LOG_FILE"
 
 exit 0
