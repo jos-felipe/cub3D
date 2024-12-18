@@ -6,13 +6,13 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/18 09:44:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:54:37 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
-static int	completeness_check(t_scene *scene);
+static int	completeness_check(t_scene *scene, int ret);
 static int	init_scene(t_scene *scene);
 static int	process_line(char *line, t_scene *scene, int fd);
 
@@ -22,8 +22,7 @@ int	parse_scene(char *file_path, t_scene *scene)
 	int		fd;
 	int		ret;
 
-	ret = INVALID_IDENTIFIER;
-	init_scene(scene);
+	ret = init_scene(scene);
 	if (check_file_extension(file_path))
 		return (INVALID_FILE_EXT);
 	fd = open(file_path, O_RDONLY);
@@ -39,9 +38,7 @@ int	parse_scene(char *file_path, t_scene *scene)
 		line = get_next_line(fd);
 	}
 	close(fd);
-	if (!ret)
-		ret = completeness_check(scene);
-	return (ret);
+	return (completeness_check(scene, ret));
 }
 
 static int	init_scene(t_scene *scene)
@@ -62,7 +59,7 @@ static int	init_scene(t_scene *scene)
 	scene->map.player_x = -1;
 	scene->map.player_y = -1;
 	scene->map.player_dir = '\0';
-	return (1);
+	return (INVALID_IDENTIFIER);
 }
 
 static int	process_line(char *line, t_scene *scene, int fd)
@@ -83,8 +80,10 @@ static int	process_line(char *line, t_scene *scene, int fd)
 	return (INVALID_IDENTIFIER);
 }
 
-static int	completeness_check(t_scene *scene)
+static int	completeness_check(t_scene *scene, int ret)
 {
+	if (ret)
+		return (ret);
 	if (!scene->textures.north || !scene->textures.south
 		|| !scene->textures.west || !scene->textures.east)
 		return (UNDEFINED_ERROR);
