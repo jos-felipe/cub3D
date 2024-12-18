@@ -132,7 +132,7 @@ else
 fi
 
 printf "D2. Only new line: "
-./$NAME asset/map/misconfig/d2_only_new_line.cub 2> "$ERR_FILE"
+./$NAME asset/map/misconfig/d2_only_new_line.cub 2> "$ERR_FILE" >/dev/null
 ERR=$(cat "$ERR_FILE")
 if [[ $ERR != $ERROR_UNDEFINED_ERROR ]]; then
 	printf "KO\n"
@@ -202,7 +202,7 @@ else
 fi
 
 printf "E4. Multiple textures: "
-./$NAME asset/map/misconfig/e4_texture_multiple.cub 2> "$ERR_FILE"
+./$NAME asset/map/misconfig/e4_texture_multiple.cub 2> "$ERR_FILE" >/dev/null
 ERR=$(cat "$ERR_FILE")
 if [[ $ERR != $ERROR_UNDEFINED_ERROR ]]; then
 	printf "KO\n"
@@ -244,7 +244,7 @@ else
 fi
 
 printf "F3. Multiple colors: "
-./$NAME asset/map/misconfig/f3_color_multiple.cub 2> "$ERR_FILE"
+./$NAME asset/map/misconfig/f3_color_multiple.cub 2> "$ERR_FILE" >/dev/null
 ERR=$(cat "$ERR_FILE")
 if [[ $ERR != $ERROR_UNDEFINED_ERROR ]]; then
 	printf "KO\n"
