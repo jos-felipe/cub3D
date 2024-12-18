@@ -285,6 +285,34 @@ else
 	printf "OK\n"
 fi
 
+printf "\nH1. No player: "
+./$NAME asset/map/misconfig/h1_player_zero.cub 2> "$ERR_FILE"
+ERR=$(cat "$ERR_FILE")
+if [[ $ERR != $ERROR_INVALID_PLAYER ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_PLAYER"
+	exit 1
+else
+	printf "OK\n"
+fi
+
+printf "H2. Multiple players: "
+./$NAME asset/map/misconfig/h2_player_multiple.cub 2> "$ERR_FILE"
+ERR=$(cat "$ERR_FILE")
+if [[ $ERR != $ERROR_INVALID_PLAYER ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_PLAYER"
+	exit 1
+else
+	printf "OK\n"
+fi
+
 rm -f "$ERR_FILE"
 
 exit 0
