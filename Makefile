@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/12/12 12:59:05 by josfelip         ###   ########.fr        #
+#    Updated: 2024/12/18 09:30:45 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -61,7 +61,7 @@ HDR	= $(addprefix $(INC_DIR)/, $(HDR_CH))
 LIBFT = $(LIBFT_DIR)/libft.a
 
 # Include paths
-INC	= -I$(INC_DIR) -I$(LIBFT_DIR)
+INC	= -I$(INC_DIR) -I$(LIBFT_DIR)/include
 
 RM = rm -rf
 
