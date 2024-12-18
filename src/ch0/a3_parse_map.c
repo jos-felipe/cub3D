@@ -6,14 +6,14 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/18 11:28:36 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/18 13:50:45 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
 static char	**normalize_grid(char **grid, t_map *map);
-static char	**realloc_map(char **map, int height);
+static char	**realloc_grid(char **map, int height);
 static int	get_max_width(char **map);
 static int	is_valid_map_line(char *line);
 
@@ -29,7 +29,7 @@ int	parse_map(int fd, char *line, t_scene *scene)
 	{
 		if (!is_valid_map_line(trimmed))
 			return (free_and_return(INVALID_MAP_CHARS, trimmed, grid));
-		grid = realloc_map(grid, ++scene->map.height);
+		grid = realloc_grid(grid, ++scene->map.height);
 		if (!grid)
 			return (free_and_return(INVALID_MALLOC, trimmed, grid));
 		grid[scene->map.height - 1] = trimmed;
@@ -43,27 +43,24 @@ int	parse_map(int fd, char *line, t_scene *scene)
 	return (validate_map(&scene->map));
 }
 
-static int    is_valid_map_line(char *line)
+static int	is_valid_map_line(char *line)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (line[i])
 	{
 		if (!ft_strchr("0NSEW1 ", line[i]))
-		{
-			ft_printf("Invalid character in map: %c\n", line[i]);
 			return (0);
-		}
 		i++;
 	}
 	return (1);
 }
 
-static char    **realloc_map(char **old_map, int new_size)
+static char	**realloc_grid(char **old_grid, int new_size)
 {
-	char    **new_map;
-	int        i;
+	char	**new_map;
+	int		i;
 
 	new_map = ft_calloc(new_size + 1, sizeof(char *));
 	if (!new_map)
@@ -71,10 +68,10 @@ static char    **realloc_map(char **old_map, int new_size)
 	i = 0;
 	while (i < new_size - 1)
 	{
-		new_map[i] = old_map[i];
+		new_map[i] = old_grid[i];
 		i++;
 	}
-	free(old_map);
+	free(old_grid);
 	return (new_map);
 }
 
@@ -100,11 +97,11 @@ static int    get_max_width(char **map)
 	return (max_width);
 }
 
-static char **normalize_grid(char **grid,  t_map *map)
+static char	**normalize_grid(char **grid, t_map *map)
 {
-	char    **norm_grid;
-	int     i;
-	
+	char	**norm_grid;
+	int		i;
+
 	norm_grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (!norm_grid)
 		return (NULL);
