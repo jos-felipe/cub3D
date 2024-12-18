@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:41 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/18 09:54:37 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:59:08 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,19 +64,14 @@ static int	init_scene(t_scene *scene)
 
 static int	process_line(char *line, t_scene *scene, int fd)
 {
-	static int	map_started = 0;
-
-	if (!map_started && line[0] == '\n')
+	if (line[0] == '\n')
 		return (0);
 	if (ft_strchr("NSWE", line[0]))
 		return (parse_textures(line, scene));
 	if (ft_strchr("FC", line[0]))
 		return (parse_colors(line, scene));
 	if (ft_strchr("1 ", line[0]))
-	{
-		map_started = 1;
 		return (parse_map(fd, line, scene));
-	}
 	return (INVALID_IDENTIFIER);
 }
 
