@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/18 14:34:37 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:03:03 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ int	validate_map(t_map *map)
 	int	i;
 	int	j;
 	int	player_count;
+	int	ret;
 
 	if (map->grid == NULL)
 		return (INVALID_MALLOC);
@@ -29,12 +30,15 @@ int	validate_map(t_map *map)
 	{
 		j = -1;
 		while (++j < map->width)
-			if (process_map_char(map, i, j, &player_count))
-				return (INVALID_MAP);
+		{
+			ret = process_map_char(map, i, j, &player_count);
+			if (ret)
+				return (ret);
+		}
 	}
 	if (player_count != 1)
 		return (INVALID_PLAYER);
-	return (0);
+	return (ret);
 }
 
 static int	check_surrounding_walls(t_map *map, int i, int j)
@@ -64,22 +68,15 @@ static int	process_map_char(t_map *map, int i, int j, int *player_count)
 	if (ft_strchr("0NSWE", c))
 	{
 		if (!check_surrounding_walls(map, i, j))
-			return (1);
+			return (INVALID_MAP);
 		if (ft_strchr("NSEW", c))
 		{
 			if (++(*player_count) > 1)
-				return (1);
+				return (INVALID_PLAYER);
 			map->player_x = j;
 			map->player_y = i;
 			map->player_dir = c;
 		}
 	}
 	return (0);
-}
-
-int free_and_return(t_error code, char *s, char **ss)
-{
-	free(s);
-	ft_free_split(ss);
-	return (code);
 }

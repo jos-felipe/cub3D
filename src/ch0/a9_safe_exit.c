@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   a9_safe_exit.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/02 05:21:36 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/09 19:33:55 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:02:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
+
+int	free_and_return(t_error code, char *s, char **ss)
+{
+	free(s);
+	ft_free_split(ss);
+	return (code);
+}
 
 int free_scene(t_scene *scene)
 {
