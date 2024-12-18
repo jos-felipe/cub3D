@@ -6,15 +6,15 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:40:12 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/18 13:50:45 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:26:35 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch0_scene_description_file.h"
 
 static char	**normalize_grid(char **grid, t_map *map);
-static char	**realloc_grid(char **map, int height);
-static int	get_max_width(char **map);
+static char	**realloc_grid(char **grid, int height);
+static int	get_max_width(char **grid);
 static int	is_valid_map_line(char *line);
 
 int	parse_map(int fd, char *line, t_scene *scene)
@@ -24,6 +24,8 @@ int	parse_map(int fd, char *line, t_scene *scene)
 	char	*trimmed;
 
 	grid = ft_calloc(1, sizeof(char *));
+	if (!grid)
+		return (INVALID_MALLOC);
 	trimmed = ft_strtrim(line, "\n");
 	while (trimmed)
 	{
@@ -37,7 +39,6 @@ int	parse_map(int fd, char *line, t_scene *scene)
 		trimmed = ft_strtrim(gnl, "\n");
 		free(gnl);
 	}
-	scene->map.width = get_max_width(grid);
 	scene->map.grid = normalize_grid(grid, &scene->map);
 	ft_free_split(grid);
 	return (validate_map(&scene->map));
@@ -75,23 +76,21 @@ static char	**realloc_grid(char **old_grid, int new_size)
 	return (new_map);
 }
 
-static int    get_max_width(char **map)
+static int	get_max_width(char **grid)
 {
-	int    max_width;
-	int    current_width;
-	int    i;
+	int	i;
+	int	max_width;
+	int	width;
 
-	if (!map)
-		return (0);
 	max_width = 0;
 	i = 0;
-	while (map[i])
+	while (grid[i])
 	{
-		current_width = 0;
-		while (map[i][current_width])
-			current_width++;
-		if (current_width > max_width)
-			max_width = current_width;
+		width = 0;
+		while (grid[i][width])
+			width++;
+		if (width > max_width)
+			max_width = width;
 		i++;
 	}
 	return (max_width);
@@ -102,6 +101,7 @@ static char	**normalize_grid(char **grid, t_map *map)
 	char	**norm_grid;
 	int		i;
 
+	map->width = get_max_width(grid);
 	norm_grid = ft_calloc(map->height + 1, sizeof(char *));
 	if (!norm_grid)
 		return (NULL);
