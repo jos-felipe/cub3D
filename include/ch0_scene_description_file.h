@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/18 09:23:24 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/19 11:57:16 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,6 @@ extern const char	*g_error_messages[];
 
 int		check_file_extension(char *file_path);
 int		free_and_return(t_error code, char *s, char **ss);
-int		free_scene(t_scene *scene);
 int		parse_colors(char *line, t_scene *scene);
 int		parse_map(int fd, char *line, t_scene *scene);
 int		parse_scene(char *file_path, t_scene *scene);
@@ -78,6 +77,7 @@ int		parse_textures(char *line, t_scene *scene);
 int		validate_map(t_map *map);
 int		write2err_and_return(t_error code);
 void	debug_scene(t_scene *scene);
+void	free_scene(t_scene *scene);
 void	write2err(t_error code, t_scene *maze);
 
 #endif
