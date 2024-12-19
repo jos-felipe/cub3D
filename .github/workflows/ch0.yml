@@ -10,14 +10,14 @@ on:
 jobs:
   global_job:
     runs-on: ubuntu-latest
-    name: Functional
+    name: ch0-functional
     steps:
     - uses: actions/checkout@v3
     - run: cd ./qa && ./ch0.sh
 
   valgrind:
     runs-on: ubuntu-latest
-    name: Leaks
+    name: ch0-leaks
     steps:
     - uses: actions/checkout@v2
     - name: 42valgrind Leak checker
