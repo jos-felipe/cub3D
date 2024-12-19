@@ -132,7 +132,7 @@ else
 fi
 
 printf "D2. Only new line: "
-./$NAME asset/map/misconfig/d2_only_new_line.cub 2> "$ERR_FILE"
+./$NAME asset/map/misconfig/d2_only_new_line.cub 2> "$ERR_FILE" >/dev/null
 ERR=$(cat "$ERR_FILE")
 if [[ $ERR != $ERROR_UNDEFINED_ERROR ]]; then
 	printf "KO\n"
@@ -202,7 +202,7 @@ else
 fi
 
 printf "E4. Multiple textures: "
-./$NAME asset/map/misconfig/e4_texture_multiple.cub 2> "$ERR_FILE"
+./$NAME asset/map/misconfig/e4_texture_multiple.cub 2> "$ERR_FILE" >/dev/null
 ERR=$(cat "$ERR_FILE")
 if [[ $ERR != $ERROR_UNDEFINED_ERROR ]]; then
 	printf "KO\n"
@@ -244,7 +244,7 @@ else
 fi
 
 printf "F3. Multiple colors: "
-./$NAME asset/map/misconfig/f3_color_multiple.cub 2> "$ERR_FILE"
+./$NAME asset/map/misconfig/f3_color_multiple.cub 2> "$ERR_FILE" >/dev/null
 ERR=$(cat "$ERR_FILE")
 if [[ $ERR != $ERROR_UNDEFINED_ERROR ]]; then
 	printf "KO\n"
@@ -280,6 +280,34 @@ if [[ $ERR != "" ]]; then
 	echo "$ERR"
 	echo "Expected:"
 	echo ""
+	exit 1
+else
+	printf "OK\n"
+fi
+
+printf "\nH1. No player: "
+./$NAME asset/map/misconfig/h1_player_zero.cub 2> "$ERR_FILE"
+ERR=$(cat "$ERR_FILE")
+if [[ $ERR != $ERROR_INVALID_PLAYER ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_PLAYER"
+	exit 1
+else
+	printf "OK\n"
+fi
+
+printf "H2. Multiple players: "
+./$NAME asset/map/misconfig/h2_player_multiple.cub 2> "$ERR_FILE"
+ERR=$(cat "$ERR_FILE")
+if [[ $ERR != $ERROR_INVALID_PLAYER ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo "$ERROR_INVALID_PLAYER"
 	exit 1
 else
 	printf "OK\n"

@@ -3,22 +3,22 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42.fr>          +#+  +:+       +#+        */
+/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/25 16:11:26 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/05 12:27:46 by josfelip         ###   ########.fr       */
+/*   Updated: 2024/12/18 09:35:02 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-#include "../lib/libft/include/libft.h"
-#include "../include/ch0_scene_description_file.h"
+#include "ch0_scene_description_file.h"
+#include "libft.h"
 
 int	main(int argc, char *argv[])
 {
 	int		ret;
 	t_scene	maze;
-	
+
 	if (argc != 2)
 		return (write2err_and_return(INVALID_ARGS));
 	ret = parse_scene(argv[1], &maze);
