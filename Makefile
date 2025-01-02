@@ -6,31 +6,32 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/12/18 09:30:45 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/01 22:11:05 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PROJECT_NAME = cub3D
 
 # Target executable
-NAME = ${PROJECT_NAME}
-ARGS =
+NAME = $(PROJECT_NAME)
 
 # Compiler directives
 CC		= cc
 CFLAGS	= -Wall -Wextra -Werror
 DFLAGS	= -g3
+LFLAGS	= -ldl -lglfw -pthread -lm
 
 # Directory structure
 SRC_DIR		= src
 OBJ_DIR		= obj
 INC_DIR		= include
 LIBFT_DIR	= lib/libft
+LIBMLX_DIR	= lib/MLX42
 
 # Binaries for debugging purposes
 ifdef WITH_DEBUG
-  NAME = ${PROJECT_NAME}_debug
-  CFLAGS = ${DFLAGS}
+  NAME = $(PROJECT_NAME)_debug
+  CFLAGS = $(DFLAGS)
   OBJ_DIR = obj_debug
 endif
 
@@ -58,41 +59,48 @@ HDR_CH = ch0_scene_description_file.h
 HDR	= $(addprefix $(INC_DIR)/, $(HDR_CH))
 
 # Libraries
-LIBFT = $(LIBFT_DIR)/libft.a
+LIBFT	= $(LIBFT_DIR)/libft.a
+LIBMLX	= $(LIBMLX_DIR)/build/libmlx42.a
 
 # Include paths
-INC	= -I$(INC_DIR) -I$(LIBFT_DIR)/include
+INC	= -I$(INC_DIR) -I$(LIBFT_DIR)/include -I$(LIBMLX_DIR)/include
 
 RM = rm -rf
 
 # Default target
-all: ${NAME}
+all: $(NAME)
 
 # Link the program
-$(NAME): $(LIBFT) $(OBJ)
-	$(CC) $(OBJ) $(LIBFT) -o $(NAME)
+$(NAME):  $(OBJ) $(LIBFT) $(LIBMLX)
+	$(CC) $(OBJ) $(LIBFT) $(LIBMLX) $(LFLAGS) -o $(NAME)
 
 # Compile libft
 $(LIBFT):
-	@make -C ${LIBFT_DIR} --no-print-directory
+	@make -sC $(LIBFT_DIR) --no-print-directory
+
+# Compile libmlx
+$(LIBMLX):
+	@cmake $(LIBMLX_DIR) -B $(LIBMLX_DIR)/build
+	@make -sC $(LIBMLX_DIR)/build -j4 --no-print-directory
 	
 # Compile source files
-# $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
 	@mkdir -p $(dir $@)
 	$(CC) $(CFLAGS) $(INC) -c $< -o $@
 	
 # Clean object files
 clean:
-	${RM} $(OBJ_DIR)
-	${RM} $(OBJ_DIR)_debug
-	@make -C $(LIBFT_DIR) clean --no-print-directory
+	$(RM) $(OBJ_DIR)
+	$(RM) $(OBJ_DIR)_debug
 
 # Clean everything
 fclean: clean
-	${RM} ${NAME}
-	${RM} ${NAME}_debug
-	@make -C ${LIBFT_DIR} fclean --no-print-directory
+	$(RM) $(NAME)
+	$(RM) $(NAME)_debug
+	@make -C $(LIBFT_DIR) fclean --no-print-directory
+	@if [ -d "$(LIBMLX_DIR)/build" ]; then \
+		make -C $(LIBMLX_DIR)/build clean --no-print-directory; \
+	fi
 
 # Rebuild everything
 re: fclean all
@@ -100,23 +108,6 @@ re: fclean all
 debug:
 	@make WITH_DEBUG=TRUE --no-print-directory
 
-# Check variable values
-print:
-	@echo "INCLUDE_PATH: ${INCLUDE_PATH}"
-	@echo "SRC_PATH: ${SRC_PATH}"
-	@echo "OBJ_PATH: ${OBJ_PATH}"
-
-
-memcheck: all
-	@valgrind -q --leak-check=full --show-leak-kinds=all --track-origins=yes --log-file=valgrind.log ./${NAME} ${ARGS}
-	@sh qa/mem_check.sh
-	
-faultcheck: all
-	@valgrind -s --track-origins=yes ./${NAME} ${ARGS}
-
-run: all
-	./${NAME} ${ARGS}
-
-.PHONY: all libft clean fclean re debug print memcheck faultcheck run
+.PHONY: all clean fclean re debug
 
 
