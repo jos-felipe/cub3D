@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/02 13:09:20 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/02 13:13:17 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ endif
 
 # Source files by component
 SRC_MAIN	=	main.c
+
 SRC_CH0		=	ch0/a0_parse_scene.c \
 				ch0/a1_check_file_extension.c \
 		  		ch0/a2_parse_decorators.c \
@@ -44,6 +45,7 @@ SRC_CH0		=	ch0/a0_parse_scene.c \
 		  		ch0/a4_validate_map.c \
 				ch0/a9_safe_exit.c \
 				ch0/a5_debug_scene.c \
+
 SRC_CH1		=	ch1/a0_init_window.c \
 				ch1/a1_game_loop.c \
 				ch1/a2_player.c \
