@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/01 22:11:05 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/02 13:09:20 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,6 +44,10 @@ SRC_CH0		=	ch0/a0_parse_scene.c \
 		  		ch0/a4_validate_map.c \
 				ch0/a9_safe_exit.c \
 				ch0/a5_debug_scene.c \
+SRC_CH1		=	ch1/a0_init_window.c \
+				ch1/a1_game_loop.c \
+				ch1/a2_player.c \
+				ch1/a3_input.c
 
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
@@ -53,7 +57,8 @@ SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
 OBJ	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Chapter header files
-HDR_CH = ch0_scene_description_file.h
+HDR_CH = ch0_scene_description_file.h \
+		 ch1_window.h
 
 # Combine all headers with their paths
 HDR	= $(addprefix $(INC_DIR)/, $(HDR_CH))
