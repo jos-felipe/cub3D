@@ -34,4 +34,4 @@ jobs:
         run: Xvfb $DISPLAY -screen 0 1280x1024x24 &
 
       - name: Build & tests
-        run: cd qa && ./run-qa.sh
+        run: make && cd qa && ./run-qa.sh
