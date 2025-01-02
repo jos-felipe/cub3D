@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2024/12/19 13:10:59 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/01 22:11:05 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -92,15 +92,15 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
 clean:
 	$(RM) $(OBJ_DIR)
 	$(RM) $(OBJ_DIR)_debug
-	@make -C $(LIBFT_DIR) clean --no-print-directory
-	@make -C $(LIBMLX_DIR)/build clean --no-print-directory
 
 # Clean everything
 fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(NAME)_debug
 	@make -C $(LIBFT_DIR) fclean --no-print-directory
-	@make -C $(LIBMLX_DIR)/build clean --no-print-directory
+	@if [ -d "$(LIBMLX_DIR)/build" ]; then \
+		make -C $(LIBMLX_DIR)/build clean --no-print-directory; \
+	fi
 
 # Rebuild everything
 re: fclean all
