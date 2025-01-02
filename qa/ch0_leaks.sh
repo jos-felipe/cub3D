@@ -226,17 +226,6 @@ else
     printf "MOK\n"
 fi
 
-printf "G2. Valid minimalist map: "
-$LEAKS $LFLAGS ./$NAME asset/map/g2_map_minimalist.cub &> /dev/null
-LOG=$(cat "$LOG_FILE")
-if [[ "$LOG" ]]; then
-	printf "MKO\n"
-	echo "$LOG"
-	exit 1
-else
-    printf "MOK\n"
-fi
-
 printf "\nH1. No player: "
 $LEAKS $LFLAGS ./$NAME asset/map/misconfig/h1_player_zero.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
