@@ -2,7 +2,7 @@
 
 # Chapter 1: Window Management
 
-NAME=cub3D
+NAME="cub3D"
 
 ERR_FILE=$(mktemp /tmp/$NAME.XXXXXX) || {
     echo "Failed to create temporary file"

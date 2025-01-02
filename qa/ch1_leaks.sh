@@ -1,17 +1,20 @@
 #!/bin/bash
 
-# Chapter 1: Window Management
+# Chapter 1: Window Management - Leaks
 
-NAME=cub3D
+NAME="cub3D"
 
-ERR_FILE=$(mktemp /tmp/$NAME.XXXXXX) || {
+LOG_FILE=$(mktemp /tmp/$LEAKS.XXXXXX) || {
     echo "Failed to create temporary file"
     exit 1
 }
-if [ ! -w ""$ERR_FILE"" ]; then
+if [ ! -w ""$LOG_FILE"" ]; then
     echo "Temporary file is not writable"
     exit 1
 fi
+
+LEAKS="valgrind"
+LFLAGS="--leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --log-file=$LOG_FILE"
 
 # 1. Build the project
 make
@@ -21,7 +24,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # 2. Test Arena
-printf "\n\nChapter 1: Window Management\n\n" 
+printf "\n\nChapter 1: Window Management - Leaks\n\n" 
 
 printf "\nA1. Valid minimalist map: "
 
@@ -42,12 +45,13 @@ window_name="cub3D"
 
 echo "Launching cub3D..."
 # Launch your program in the background
-./$NAME asset/map/minimalist_map.cub 2> "$ERR_FILE" &
+$LEAKS $LFLAGS ./$NAME asset/map/minimalist_map.cub 2>/dev/null &
 
 # Store the program's PID
 cub3d_pid=$!
 
 echo "Waiting for window to appear..."
+sleep 10
 window_id=""
 elapsed=0
 
@@ -74,19 +78,16 @@ xdotool key Escape
 # Wait for program to exit
 wait $cub3d_pid
 
-ERR=$(cat "$ERR_FILE")
-if [[ $ERR != "" ]]; then
-	printf "KO\n"
-	echo "Actual:"
-	echo "$ERR"
-	echo "Expected:"
-	echo ""
+LOG=$(cat "$LOG_FILE")
+if [[ "$LOG" ]]; then
+	printf "MKO\n"
+	echo "$LOG"
 	exit 1
 else
-	printf "OK\n"
+    printf "MOK\n"
 fi
 
-rm -f "$ERR_FILE"
+rm -f "$LOG_FILE"
 
 echo "Test completed!"
 
