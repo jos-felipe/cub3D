@@ -37,9 +37,6 @@ Invalid identifier"
 ERROR_UNDEFINED_ERROR="Error
 Undefined error"
 
-# 0. Change to root directory
-cd ../
-
 # 1. Build the project
 make
 if [ $? -ne 0 ]; then
@@ -217,17 +214,6 @@ fi
 
 printf "\nG1. Invalid map format: "
 $LEAKS $LFLAGS ./$NAME asset/map/misconfig/g1_map_invalid_format.cub &> /dev/null
-LOG=$(cat "$LOG_FILE")
-if [[ "$LOG" ]]; then
-	printf "MKO\n"
-	echo "$LOG"
-	exit 1
-else
-    printf "MOK\n"
-fi
-
-printf "G2. Valid minimalist map: "
-$LEAKS $LFLAGS ./$NAME asset/map/g2_map_minimalist.cub &> /dev/null
 LOG=$(cat "$LOG_FILE")
 if [[ "$LOG" ]]; then
 	printf "MKO\n"

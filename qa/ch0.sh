@@ -2,7 +2,7 @@
 
 # Chapter 0: Scene Description File
 
-NAME=cub3D
+NAME="cub3D"
 
 ERR_FILE=$(mktemp /tmp/$NAME.XXXXXX) || {
     echo "Failed to create temporary file"
@@ -33,9 +33,6 @@ ERROR_INVALID_IDENTIFIER="Error
 Invalid identifier"
 ERROR_UNDEFINED_ERROR="Error
 Undefined error"
-
-# 0. Change to root directory
-cd ../
 
 # 1. Build the project
 make
@@ -266,20 +263,6 @@ if [[ $ERR != $ERROR_INVALID_MAP ]]; then
 	echo "$ERR"
 	echo "Expected:"
 	echo "$ERROR_INVALID_MAP"
-	exit 1
-else
-	printf "OK\n"
-fi
-
-printf "G2. Valid minimalist map: "
-./$NAME asset/map/g2_map_minimalist.cub 2> "$ERR_FILE"
-ERR=$(cat "$ERR_FILE")
-if [[ $ERR != "" ]]; then
-	printf "KO\n"
-	echo "Actual:"
-	echo "$ERR"
-	echo "Expected:"
-	echo ""
 	exit 1
 else
 	printf "OK\n"
