@@ -116,7 +116,7 @@
    obj:*/ld-*.so
 }
 
-# Previous MLX42 suppressions remain unchanged
+
 {
    MLX42_malloc_leak
    Memcheck:Leak

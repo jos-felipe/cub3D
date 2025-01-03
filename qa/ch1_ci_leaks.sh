@@ -1,8 +1,17 @@
 #!/bin/bash
 
-# Chapter 1: Window Management - Leaks
+printf "\n\nChapter 1: Window Management - CI & Leaks\n\n" 
 
-printf "\n\nChapter 1: Window Management - Leaks\n\n" 
+NAME="cub3D"
+
+ERR_FILE=$(mktemp /tmp/$NAME.XXXXXX) || {
+    echo "Failed to create temporary file"
+    exit 1
+}
+if [ ! -w ""$ERR_FILE"" ]; then
+    echo "Temporary file is not writable"
+    exit 1
+fi
 
 # Function to check if a command exists
 check_command() {
@@ -16,7 +25,6 @@ check_command() {
 check_command valgrind
 check_command xdotool
 
-# Build the project
 make
 if [ $? -ne 0 ]; then
 	echo "Build failed"
@@ -29,7 +37,7 @@ valgrind --leak-check=full \
          --track-origins=yes \
          --suppressions=./mlx42.supp \
          --log-file=valgrind_report.txt \
-         ./cub3D asset/map/minimalist_map.cub &
+         ./cub3D asset/map/minimalist_map.cub 2> "$ERR_FILE" &
 
 VALGRIND_PID=$!
 
@@ -56,7 +64,7 @@ fi
 
 # Send ESC key to close window
 echo "Window found! Sending ESC key..."
-xdotool windowactivate "$window_id"
+xdotool windowactivate --sync "$window_id"
 sleep 1
 xdotool key Escape
 
@@ -75,5 +83,21 @@ else
     grep "still reachable:" valgrind_report.txt
     exit 1
 fi
+
+ERR=$(cat "$ERR_FILE")
+if [[ $ERR != "" ]]; then
+	printf "KO\n"
+	echo "Actual:"
+	echo "$ERR"
+	echo "Expected:"
+	echo ""
+	exit 1
+else
+	printf "OK\n"
+fi
+
+rm -f "$ERR_FILE"
+
+echo "Test completed!"
 
 exit 0

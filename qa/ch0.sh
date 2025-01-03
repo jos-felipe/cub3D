@@ -2,7 +2,7 @@
 
 # Chapter 0: Scene Description File
 
-NAME=cub3D
+NAME="cub3D"
 
 ERR_FILE=$(mktemp /tmp/$NAME.XXXXXX) || {
     echo "Failed to create temporary file"
@@ -33,9 +33,6 @@ ERROR_INVALID_IDENTIFIER="Error
 Invalid identifier"
 ERROR_UNDEFINED_ERROR="Error
 Undefined error"
-
-# 0. Change to root directory
-cd ../
 
 # 1. Build the project
 make

@@ -37,9 +37,6 @@ Invalid identifier"
 ERROR_UNDEFINED_ERROR="Error
 Undefined error"
 
-# 0. Change to root directory
-cd ../
-
 # 1. Build the project
 make
 if [ $? -ne 0 ]; then
