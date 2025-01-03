@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/02 17:35:37 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/02 21:28:18 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -104,9 +104,8 @@ fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(NAME)_debug
 	@make -C $(LIBFT_DIR) fclean --no-print-directory
-	@if [ -d "$(LIBMLX_DIR)/build" ]; then \
-		make -C $(LIBMLX_DIR)/build clean --no-print-directory; \
-	fi
+	$(RM) $(LIBMLX_DIR)/build
+	$(RM) valgrind_report.txt
 
 # Rebuild everything
 re: fclean all

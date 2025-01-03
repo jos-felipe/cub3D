@@ -2,7 +2,7 @@
 
 # Chapter 1: Window Management - Leaks
 
-NAME="cub3D"
+printf "\n\nChapter 1: Window Management - Leaks\n\n" 
 
 # Function to check if a command exists
 check_command() {
@@ -15,12 +15,6 @@ check_command() {
 # Check if required tools are installed
 check_command valgrind
 check_command xdotool
-
-# Check if map file is provided
-if [ -z "$1" ]; then
-    echo "Usage: $0 <map_file>"
-    exit 1
-fi
 
 # Build the project
 make
@@ -35,7 +29,7 @@ valgrind --leak-check=full \
          --track-origins=yes \
          --suppressions=./mlx42.supp \
          --log-file=valgrind_report.txt \
-         ./cub3D "$1" &
+         ./cub3D asset/map/minimalist_map.cub &
 
 VALGRIND_PID=$!
 
@@ -79,4 +73,7 @@ else
     grep "indirectly lost:" valgrind_report.txt
     grep "possibly lost:" valgrind_report.txt
     grep "still reachable:" valgrind_report.txt
+    exit 1
 fi
+
+exit 0
