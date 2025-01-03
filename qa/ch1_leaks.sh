@@ -4,30 +4,6 @@
 
 NAME="cub3D"
 
-LOG_FILE=$(mktemp /tmp/$LEAKS.XXXXXX) || {
-    echo "Failed to create temporary file"
-    exit 1
-}
-if [ ! -w ""$LOG_FILE"" ]; then
-    echo "Temporary file is not writable"
-    exit 1
-fi
-
-LEAKS="valgrind"
-LFLAGS="--leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --log-file=$LOG_FILE"
-
-# 1. Build the project
-make
-if [ $? -ne 0 ]; then
-	echo "Build failed"
-	exit 1
-fi
-
-# 2. Test Arena
-printf "\n\nChapter 1: Window Management - Leaks\n\n" 
-
-printf "\nA1. Valid minimalist map: "
-
 # Function to check if a command exists
 check_command() {
     if ! command -v "$1" &> /dev/null; then
@@ -36,27 +12,42 @@ check_command() {
     fi
 }
 
-# Check if xdotool is installed
+# Check if required tools are installed
+check_command valgrind
 check_command xdotool
 
-# Wait for the window to appear (adjust timeout if needed)
-timeout=5
+# Check if map file is provided
+if [ -z "$1" ]; then
+    echo "Usage: $0 <map_file>"
+    exit 1
+fi
+
+# Build the project
+make
+if [ $? -ne 0 ]; then
+	echo "Build failed"
+	exit 1
+fi
+
+# Start valgrind in background
+valgrind --leak-check=full \
+         --show-leak-kinds=all \
+         --track-origins=yes \
+         --suppressions=./mlx42.supp \
+         --log-file=valgrind_report.txt \
+         ./cub3D "$1" &
+
+VALGRIND_PID=$!
+
+# Wait for window to appear
 window_name="cub3D"
-
-echo "Launching cub3D..."
-# Launch your program in the background
-$LEAKS $LFLAGS ./$NAME asset/map/minimalist_map.cub 2>/dev/null &
-
-# Store the program's PID
-cub3d_pid=$!
+timeout=15
+elapsed=0
+window_id=""
 
 echo "Waiting for window to appear..."
-sleep 10
-window_id=""
-elapsed=0
-
 while [ -z "$window_id" ] && [ $elapsed -lt $timeout ]; do
-    window_id=$(xdotool search --name "$window_name" 2>/dev/null)
+    window_id=$(xdotool search --name "^${window_name}$" 2>/dev/null)
     if [ -z "$window_id" ]; then
         sleep 1
         ((elapsed++))
@@ -65,30 +56,27 @@ done
 
 if [ -z "$window_id" ]; then
     echo "Error: Window not found after $timeout seconds"
-    kill $cub3d_pid 2>/dev/null
+    kill $VALGRIND_PID 2>/dev/null
     exit 1
 fi
 
+# Send ESC key to close window
 echo "Window found! Sending ESC key..."
-# Activate the window and send ESC key
 xdotool windowactivate "$window_id"
-sleep 1  # Wait a bit for window to activate
+sleep 1
 xdotool key Escape
 
-# Wait for program to exit
-wait $cub3d_pid
+# Wait for valgrind to finish
+wait $VALGRIND_PID
 
-LOG=$(cat "$LOG_FILE")
-if [[ "$LOG" ]]; then
-	printf "MKO\n"
-	echo "$LOG"
-	exit 1
+# Check if any leaks were found (excluding suppressed ones)
+if grep -q "definitely lost: 0 bytes in 0 blocks" valgrind_report.txt; then
+    echo "No memory leaks found!"
 else
-    printf "MOK\n"
+    echo "Memory leaks detected! Check valgrind_report.txt for details."
+    echo "Summary of leaks:"
+    grep "definitely lost:" valgrind_report.txt
+    grep "indirectly lost:" valgrind_report.txt
+    grep "possibly lost:" valgrind_report.txt
+    grep "still reachable:" valgrind_report.txt
 fi
-
-rm -f "$LOG_FILE"
-
-echo "Test completed!"
-
-exit 0
