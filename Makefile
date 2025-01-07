@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/01 22:11:05 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 09:48:19 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,7 @@ endif
 
 # Source files by component
 SRC_MAIN	=	main.c
+
 SRC_CH0		=	ch0/a0_parse_scene.c \
 				ch0/a1_check_file_extension.c \
 		  		ch0/a2_parse_decorators.c \
@@ -45,15 +46,20 @@ SRC_CH0		=	ch0/a0_parse_scene.c \
 				ch0/a9_safe_exit.c \
 				ch0/a5_debug_scene.c \
 
+SRC_CH1		=	ch1/a0_window_management.c \
+				ch1/a1_event_handling.c
+
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
-		$(addprefix $(SRC_DIR)/, $(SRC_CH0))
+		$(addprefix $(SRC_DIR)/, $(SRC_CH0)) \
+		$(addprefix $(SRC_DIR)/, $(SRC_CH1))
 
 # Generate object file paths, maintaining directory structure
 OBJ	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Chapter header files
-HDR_CH = ch0_scene_description_file.h
+HDR_CH = ch0_scene_description_file.h \
+		 ch1_window_management.h
 
 # Combine all headers with their paths
 HDR	= $(addprefix $(INC_DIR)/, $(HDR_CH))
@@ -98,9 +104,8 @@ fclean: clean
 	$(RM) $(NAME)
 	$(RM) $(NAME)_debug
 	@make -C $(LIBFT_DIR) fclean --no-print-directory
-	@if [ -d "$(LIBMLX_DIR)/build" ]; then \
-		make -C $(LIBMLX_DIR)/build clean --no-print-directory; \
-	fi
+	$(RM) $(LIBMLX_DIR)/build
+	$(RM) valgrind_report.txt
 
 # Rebuild everything
 re: fclean all
@@ -108,6 +113,9 @@ re: fclean all
 debug:
 	@make WITH_DEBUG=TRUE --no-print-directory
 
-.PHONY: all clean fclean re debug
+leaks: debug
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=./mlx42.supp ./$(NAME)_debug asset/map/minimalist_map.cub
+
+.PHONY: all clean fclean re debug leaks
 
 

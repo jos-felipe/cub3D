@@ -8,6 +8,9 @@
 !src
 
 # Keep files
+!.gitignore
 !main.c
 !Makefile
-!.gitignore
+!mlx42.supp
+!LICENSE
+!README.md

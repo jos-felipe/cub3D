@@ -4,7 +4,7 @@
 trap 'echo "Error: $BASH_COMMAND failed with exit code $?"' ERR
 
 # Find all ch*.sh files and store them in an array
-mapfile -t scripts < <(find . -maxdepth 1 -type f -name "ch*.sh")
+mapfile -t scripts < <(find qa -maxdepth 1 -type f -name "ch*.sh")
 
 if [ ${#scripts[@]} -eq 0 ]; then
     echo "No ch*.sh scripts found in qa directory"

@@ -1,0 +1,295 @@
+{
+   dlopen_worker_leak
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   ...
+   fun:*dl*find_object_update
+   fun:dl_open_worker_begin
+   ...
+   fun:dlopen@@GLIBC_2.34
+}
+
+{
+   vmware_dri_leak
+   Memcheck:Leak
+   match-leak-kinds: indirect
+   fun:calloc
+   obj:*/vmwgfx_dri.so
+   ...
+   obj:*/libglfw.so.3*
+}
+
+{
+   vmware_dri_leak_all
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   obj:*/vmwgfx_dri.so
+}
+
+{
+   glfw_window_leak
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:glfwCreateWindow
+}
+
+
+{
+   dl_rpath_strncmp
+   Memcheck:Addr8
+   fun:strncmp
+   fun:is_dst
+   fun:*dl*dst_count
+   fun:expand_dynamic_string_token
+   fun:fillin_rpath.isra.0
+   fun:decompose_rpath
+   fun:*dl*map_object
+   fun:openaux
+   fun:*dl*catch_exception
+   fun:*dl*map_object_deps
+   fun:dl_open_worker_begin
+   fun:*dl*catch_exception
+}
+
+{
+   dl_rpath_strdup
+   Memcheck:Addr8
+   fun:strncmp
+   ...
+   obj:*libdl.so*
+}
+
+{
+   dl_rpath_strdup_2
+   Memcheck:Addr8
+   ...
+   fun:strdup
+   fun:decompose_rpath
+   fun:*dl*map_object
+   ...
+}
+
+{
+   dl_deps_all
+   Memcheck:Addr8
+   ...
+   obj:*/ld-linux-x86-64.so*
+}
+
+{
+   dl_load_invalid_read_1
+   Memcheck:Addr8
+   ...
+   fun:strncmp
+   fun:is_dst
+   ...
+   obj:*/ld-*.so
+}
+
+{
+   dl_load_invalid_read_2
+   Memcheck:Addr8
+   ...
+   fun:strncmp
+   ...
+   fun:*dl*dst_substitute
+   ...
+   obj:*/ld-*.so
+}
+
+{
+   dl_decompose_rpath
+   Memcheck:Addr8
+   ...
+   fun:decompose_rpath
+   fun:*dl*map_object
+   ...
+   obj:*/ld-*.so
+}
+
+{
+   dl_catch_exception
+   Memcheck:Addr8
+   ...
+   fun:*dl*catch_exception
+   ...
+   obj:*/ld-*.so
+}
+
+{
+   dl_open_worker
+   Memcheck:Addr8
+   ...
+   fun:dl_open_worker*
+   ...
+   obj:*/ld-*.so
+}
+
+
+{
+   MLX42_malloc_leak
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:malloc
+   ...
+   fun:mlx_init
+}
+
+{
+   MLX42_texture_leak
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:malloc
+   ...
+   fun:mlx_load_png
+}
+
+{
+   MLX42_image_leak
+   Memcheck:Leak
+   match-leak-kinds: definite,indirect
+   fun:malloc
+   ...
+   fun:mlx_new_image
+}
+
+{
+   MLX42_window_leak
+   Memcheck:Leak
+   match-leak-kinds: possible
+   ...
+   fun:glfwCreateWindow
+}
+
+{
+   MLX42_context_leak
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:glfwMakeContextCurrent
+}
+
+{
+   MLX42_gl_leak
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   obj:*/libGL.so*
+}
+
+{
+   MLX42_complete_leak
+   Memcheck:Leak
+   match-leak-kinds: all
+   fun:*
+   ...
+   obj:*/libmlx42.a
+}
+
+{
+   MLX42_hooks_leak
+   Memcheck:Leak
+   match-leak-kinds: all
+   ...
+   fun:mlx_loop_hook
+}
+
+{
+   MLX42_leak_1
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libglfw.so*
+}
+
+{
+   MLX42_leak_2
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libX11.so*
+}
+
+{
+   MLX42_leak_3
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libGLX.so*
+}
+
+{
+   MLX42_leak_4
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   obj:*/libwayland-client.so*
+}
+
+{
+   <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_catch_exception
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:mlx_init
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:XrmGetStringDatabase
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_XrmInitParseInfo
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:__tls_get_addr
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:__pthread_once_slow
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:glfwInit
+   ...
+}
+{
+ <MLX_CODAM>
+   Memcheck:Leak
+   match-leak-kinds: reachable
+   ...
+   fun:_dl_init
+   ...
+}

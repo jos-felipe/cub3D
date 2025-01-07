@@ -31,7 +31,8 @@ jobs:
           sudo apt-get install -y -qq xorg-dev xvfb libglfw3-dev valgrind
 
       - name: Setup virtual screen
-        run: Xvfb $DISPLAY -screen 0 1280x1024x24 &
+        run:
+          Xvfb $DISPLAY -screen 0 1280x1024x24 &
 
       - name: Build & tests
-        run: make && cd qa && ./run-qa.sh
+        run: make && qa/run-qa.sh
