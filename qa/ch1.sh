@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 08:32:16 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 08:54:30 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 09:09:02 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,8 @@ fi
 
 # Export required environment variables for X11
 export DISPLAY=:99
+export XAUTHORITY=/tmp/.Xauthority
+export XDG_RUNTIME_DIR=/tmp/runtime-runner
 # export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGLX.so.0"
 
 # Start Xvfb if we're in CI environment
@@ -55,6 +57,7 @@ export DISPLAY=:99
 #     sleep 2
 # fi
 
+echo "CI="$CI
 # Run valgrind with Xvfb if in CI, otherwise run normally
 if [ -n "$CI" ]; then
 	xvfb-run valgrind --leak-check=full \
