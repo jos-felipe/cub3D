@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 08:32:16 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 09:32:29 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 09:36:35 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,7 +64,7 @@ if [ -n "$CI" ]; then
 					  --track-origins=yes \
 					  --suppressions=./mlx42.supp \
 					  --log-file=valgrind_report.txt \
-					  ./cub3D asset/map/minimalist_map.cub 2> "$ERR_FILE" &
+					  ./cub3D asset/map/minimalist_map.cub &
 else
 	valgrind --leak-check=full \
 			 --show-leak-kinds=all \
