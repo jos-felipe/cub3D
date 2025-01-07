@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a5_test_unit.c                                     :+:      :+:    :+:   */
+/*   a5_demo.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/07 16:51:55 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/07 17:05:18 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,25 +37,21 @@ static void	draw_cell(mlx_image_t *img, int x, int y, uint32_t color)
 	}
 }
 
-static void	draw_player(mlx_image_t *img, t_player *player)
+static void	draw_player_square(mlx_image_t *img, double x, double y)
 {
-	int		i;
-	int		j;
-	int		px;
-	int		py;
-	double	screen_x;
-	double	screen_y;
+	int	i;
+	int	j;
+	int	px;
+	int	py;
 
-	screen_x = player->pos_x * CELL_SIZE;
-	screen_y = player->pos_y * CELL_SIZE;
 	i = -PLAYER_SIZE / 2;
 	while (i < PLAYER_SIZE / 2)
 	{
 		j = -PLAYER_SIZE / 2;
 		while (j < PLAYER_SIZE / 2)
 		{
-			px = screen_x + i;
-			py = screen_y + j;
+			px = x + i;
+			py = y + j;
 			mlx_put_pixel(img, px, py, 0xFF0000FF);
 			j++;
 		}
@@ -63,18 +59,24 @@ static void	draw_player(mlx_image_t *img, t_player *player)
 	}
 }
 
-void	draw_direction(mlx_image_t *img, t_player *player)
+static void	draw_player(mlx_image_t *img, t_player *player)
+{
+	double	screen_x;
+	double	screen_y;
+
+	screen_x = player->pos_x * CELL_SIZE;
+	screen_y = player->pos_y * CELL_SIZE;
+	draw_player_square(img, screen_x, screen_y);
+}
+
+static void	draw_direction(mlx_image_t *img, t_player *player)
 {
 	int		i;
 	double	start_x;
 	double	start_y;
-	double	end_x;
-	double	end_y;
 
 	start_x = player->pos_x * CELL_SIZE;
 	start_y = player->pos_y * CELL_SIZE;
-	end_x = start_x + player->dir_x * CELL_SIZE;
-	end_y = start_y + player->dir_y * CELL_SIZE;
 	i = 0;
 	while (i < CELL_SIZE)
 	{

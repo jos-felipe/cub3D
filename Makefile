@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 16:57:08 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 17:04:37 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -51,7 +51,7 @@ SRC_CH1		=	ch1/a0_window_management.c \
 				ch1/a2_player_init.c \
 				ch1/a3_player_movement.c \
 				ch1/a4_player_utils.c \
-				ch1/a5_test_unit.c
+				ch1/a5_demo.c
 
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
