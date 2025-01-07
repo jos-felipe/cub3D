@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 08:32:16 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 08:44:05 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 08:49:44 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,14 +46,14 @@ if [ $? -ne 0 ]; then
 fi
 
 # Export required environment variables for X11
-export DISPLAY=:99
-export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGLX.so.0"
+# export DISPLAY=:99
+# export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGLX.so.0"
 
 # Start Xvfb if we're in CI environment
-if [ -n "$CI" ]; then
-    Xvfb :99 -screen 0 1024x768x24 &
-    sleep 2
-fi
+# if [ -n "$CI" ]; then
+#     Xvfb :99 -screen 0 1024x768x24 &
+#     sleep 2
+# fi
 
 # Run valgrind with Xvfb if in CI, otherwise run normally
 if [ -n "$CI" ]; then
