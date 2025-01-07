@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 08:32:16 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 09:25:04 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 09:32:29 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,7 +59,7 @@ export XDG_RUNTIME_DIR=/tmp/runtime-runner
 
 # Run valgrind with Xvfb if in CI, otherwise run normally
 if [ -n "$CI" ]; then
-	xvfb-run -a valgrind --leak-check=full \
+	xvfb-run -a -s "-screen 0 1280x1024x24" valgrind --leak-check=full \
 					  --show-leak-kinds=all \
 					  --track-origins=yes \
 					  --suppressions=./mlx42.supp \
