@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 09:48:19 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 10:56:22 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -49,7 +49,7 @@ SRC_CH0		=	ch0/a0_parse_scene.c \
 SRC_CH1		=	ch1/a0_window_management.c \
 				ch1/a1_event_handling.c
 
-SRC_CH2		=	ch2/a0_player_management.c \
+SRC_CH2		=	ch2/a0_player_init.c \
 				ch2/a1_player_movement.c
 
 # Combine all sources with their paths
