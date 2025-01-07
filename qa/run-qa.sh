@@ -28,7 +28,7 @@ has_failures=0
 # Run each script in parallel
 for script in "${scripts[@]}"; do
     echo "Starting $script..."
-    "./$script" &
+    "./$script"
     pids+=($!)
 done
 
