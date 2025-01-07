@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 08:32:16 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 08:49:44 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 08:54:30 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,7 +46,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Export required environment variables for X11
-# export DISPLAY=:99
+export DISPLAY=:99
 # export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGLX.so.0"
 
 # Start Xvfb if we're in CI environment
