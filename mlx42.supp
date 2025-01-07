@@ -1,4 +1,16 @@
 {
+   dlopen_worker_leak
+   Memcheck:Leak
+   match-leak-kinds: definite
+   fun:malloc
+   ...
+   fun:*dl*find_object_update
+   fun:dl_open_worker_begin
+   ...
+   fun:dlopen@@GLIBC_2.34
+}
+
+{
    vmware_dri_leak
    Memcheck:Leak
    match-leak-kinds: indirect

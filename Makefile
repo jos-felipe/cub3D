@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/02 21:28:18 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 09:48:19 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -113,6 +113,9 @@ re: fclean all
 debug:
 	@make WITH_DEBUG=TRUE --no-print-directory
 
-.PHONY: all clean fclean re debug
+leaks: debug
+	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=./mlx42.supp ./$(NAME)_debug asset/map/minimalist_map.cub
+
+.PHONY: all clean fclean re debug leaks
 
 
