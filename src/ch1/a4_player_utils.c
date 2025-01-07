@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/07 12:53:01 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:51:05 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch2_player_management.h"
+#include "ch1_window_management.h"
 
 int	check_collision(t_map *map, double new_x, double new_y)
 {
@@ -33,7 +33,7 @@ void	rotate_player(t_player *player, double angle)
 	player->dir_x = player->dir_x * cos(angle) - player->dir_y * sin(angle);
 	player->dir_y = old_dir_x * sin(angle) + player->dir_y * cos(angle);
 	old_plane_x = player->plane_x;
-	player->plane_x = player->plane_x * cos(angle) - \
-	+ player->plane_y * sin(angle);
+	player->plane_x = player->plane_x * cos(angle) - +player->plane_y
+		* sin(angle);
 	player->plane_y = old_plane_x * sin(angle) + player->plane_y * cos(angle);
 }

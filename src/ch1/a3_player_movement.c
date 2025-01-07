@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a2_player_movement.c                               :+:      :+:    :+:   */
+/*   a3_player_movement.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/07 13:26:42 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:52:19 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch2_player_management.h"
+#include "ch1_window_management.h"
 
 static void	move_forward(t_player *player, t_map *map);
 static void	move_backward(t_player *player, t_map *map);

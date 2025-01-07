@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   a0_player_init.c                                   :+:      :+:    :+:   */
+/*   a2_player_init.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/07 11:03:03 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:23:22 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch2_player_management.h"
+#include "ch1_window_management.h"
 
 static void	set_initial_direction(t_player *player, char direction);
 static void	set_direction_ns(t_player *player, char direction);
