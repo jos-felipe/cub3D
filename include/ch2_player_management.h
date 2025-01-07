@@ -6,17 +6,18 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/07 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/07 10:30:40 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/07 13:10:40 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CH2_PLAYER_MANAGEMENT_H
 # define CH2_PLAYER_MANAGEMENT_H
 
+# include <math.h>
 # include "MLX42/MLX42.h"
+# include "libft.h"
 # include "ch0_scene_description_file.h"
 # include "ch1_window_management.h"
-# include "libft.h"
 
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
