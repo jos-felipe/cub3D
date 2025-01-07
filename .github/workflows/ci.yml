@@ -30,7 +30,7 @@ jobs:
       - name: Install Dependencies
         run: |
           sudo apt-get update -qq
-          sudo apt-get install -y -qq xorg-dev xvfb libglfw3-dev valgrind x11-xserver-utils
+          sudo apt-get install -y -qq xorg-dev xvfb libglfw3-dev valgrind
 
       - name: Setup virtual screen
         run: |
@@ -39,7 +39,6 @@ jobs:
           touch /tmp/.Xauthority
           Xvfb $DISPLAY -screen 0 1280x1024x24 &
           sleep 5
-          xset -display $DISPLAY dpms force on
 
       - name: Build & tests
         run: make && qa/run-qa.sh
