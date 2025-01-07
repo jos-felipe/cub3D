@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:17:39 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/02 17:37:14 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/07 16:17:09 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ static int	create_image(t_mlx *win);
 int	init_window(t_mlx *win, t_scene *scene)
 {
 	win->scene = scene;
-	win->win_width = WINDOW_WIDTH;
-	win->win_height = WINDOW_HEIGHT;
+	win->width = WINDOW_WIDTH;
+	win->height = WINDOW_HEIGHT;
 	if (create_window(win) != 0)
 		return (1);
 	if (create_image(win) != 0)
@@ -27,6 +27,7 @@ int	init_window(t_mlx *win, t_scene *scene)
 		mlx_terminate(win->mlx);
 		return (1);
 	}
+	init_player(&win->player, &scene->map);
 	init_hooks(win);
 	return (0);
 }
@@ -35,7 +36,7 @@ static int	create_window(t_mlx *win)
 {
 	mlx_set_setting(MLX_MAXIMIZED, false);
 	mlx_set_setting(MLX_STRETCH_IMAGE, true);
-	win->mlx = mlx_init(win->win_width, win->win_height, WINDOW_TITLE, false);
+	win->mlx = mlx_init(win->width, win->height, WINDOW_TITLE, false);
 	if (!win->mlx)
 	{
 		ft_putstr_fd(mlx_strerror(mlx_errno), 2);
@@ -46,7 +47,7 @@ static int	create_window(t_mlx *win)
 
 static int	create_image(t_mlx *win)
 {
-	win->img = mlx_new_image(win->mlx, win->win_width, win->win_height);
+	win->img = mlx_new_image(win->mlx, win->width, win->height);
 	if (!win->img)
 	{
 		ft_putstr_fd(mlx_strerror(mlx_errno), 2);

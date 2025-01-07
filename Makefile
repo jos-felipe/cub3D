@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 09:48:19 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 17:04:37 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,7 +47,11 @@ SRC_CH0		=	ch0/a0_parse_scene.c \
 				ch0/a5_debug_scene.c \
 
 SRC_CH1		=	ch1/a0_window_management.c \
-				ch1/a1_event_handling.c
+				ch1/a1_event_handling.c \
+				ch1/a2_player_init.c \
+				ch1/a3_player_movement.c \
+				ch1/a4_player_utils.c \
+				ch1/a5_demo.c
 
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
@@ -117,5 +121,3 @@ leaks: debug
 	valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --suppressions=./mlx42.supp ./$(NAME)_debug asset/map/minimalist_map.cub
 
 .PHONY: all clean fclean re debug leaks
-
-
