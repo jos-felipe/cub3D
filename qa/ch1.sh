@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/07 08:32:16 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 09:09:02 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/07 09:25:04 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,13 @@
 printf "\n\nChapter 1: Window Management - CI & Leaks\n\n" 
 
 NAME="cub3D"
+
+# Add debug information about environment
+echo "Debug Info:"
+echo "DISPLAY=$DISPLAY"
+echo "XDG_RUNTIME_DIR=$XDG_RUNTIME_DIR"
+echo "XAUTHORITY=$XAUTHORITY"
+echo "Running in CI: ${CI:-false}"
 
 ERR_FILE=$(mktemp /tmp/$NAME.XXXXXX) || {
     echo "Failed to create temporary file"
@@ -49,18 +56,10 @@ fi
 export DISPLAY=:99
 export XAUTHORITY=/tmp/.Xauthority
 export XDG_RUNTIME_DIR=/tmp/runtime-runner
-# export LD_PRELOAD="/usr/lib/x86_64-linux-gnu/libGL.so.1 /usr/lib/x86_64-linux-gnu/libGLX.so.0"
 
-# Start Xvfb if we're in CI environment
-# if [ -n "$CI" ]; then
-#     Xvfb :99 -screen 0 1024x768x24 &
-#     sleep 2
-# fi
-
-echo "CI="$CI
 # Run valgrind with Xvfb if in CI, otherwise run normally
 if [ -n "$CI" ]; then
-	xvfb-run valgrind --leak-check=full \
+	xvfb-run -a valgrind --leak-check=full \
 					  --show-leak-kinds=all \
 					  --track-origins=yes \
 					  --suppressions=./mlx42.supp \
@@ -76,10 +75,11 @@ else
 fi
 
 VALGRIND_PID=$!
+echo "Program started with PID: $VALGRIND_PID"
 
 # Wait for window to appear
 window_name="cub3D"
-timeout=15
+timeout=30
 elapsed=0
 window_id=""
 
@@ -87,13 +87,24 @@ echo "Waiting for window to appear..."
 while [ -z "$window_id" ] && [ $elapsed -lt $timeout ]; do
     window_id=$(xdotool search --name "^${window_name}$" 2>/dev/null)
     if [ -z "$window_id" ]; then
-        sleep 1
+         echo "Attempt $elapsed: Window not found yet..."
+        # Check if process is still running
+        if ! kill -0 $VALGRIND_PID 2>/dev/null; then
+            echo "Error: Process died before window appeared"
+            cat "$ERR_FILE"
+            exit 1
+        fi
+		sleep 1
         ((elapsed++))
     fi
 done
 
 if [ -z "$window_id" ]; then
     echo "Error: Window not found after $timeout seconds"
+    echo "Process status:"
+    ps aux | grep $VALGRIND_PID
+    echo "Error output:"
+    cat "$ERR_FILE"
     kill $VALGRIND_PID 2>/dev/null
     exit 1
 fi
