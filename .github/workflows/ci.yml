@@ -20,8 +20,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       DISPLAY: ":99"
-      XAUTHORITY: /tmp/.Xauthority
-      XDG_RUNTIME_DIR: /tmp/runtime-runner
 
     steps:
       - name: Clone repository
