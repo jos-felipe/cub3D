@@ -7,10 +7,10 @@ Roadmap:
 
 ✓ Window management (completed)
 
-Player movement and collision (completed)
+Player movement and collision 
 
-👉 Ray-casting engine (current step)
+✓ Ray-casting engine (completed)
 
-Texture mapping
+👉 Texture mapping (current step)
 
 Final touches (minimap, optimization)

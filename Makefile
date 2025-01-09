@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/07 17:04:37 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/09 09:12:35 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -53,17 +53,25 @@ SRC_CH1		=	ch1/a0_window_management.c \
 				ch1/a4_player_utils.c \
 				ch1/a5_demo.c
 
+SRC_CH2		=	ch2/a0_ray_setup.c \
+				ch2/a1_ray_calculations.c \
+				ch2/a2_ray_dda.c \
+				ch2/a3_ray_render.c \
+				ch2/a4_ray_colors.c
+
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
 		$(addprefix $(SRC_DIR)/, $(SRC_CH0)) \
-		$(addprefix $(SRC_DIR)/, $(SRC_CH1))
+		$(addprefix $(SRC_DIR)/, $(SRC_CH1)) \
+		$(addprefix $(SRC_DIR)/, $(SRC_CH2))
 
 # Generate object file paths, maintaining directory structure
 OBJ	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Chapter header files
 HDR_CH = ch0_scene_description_file.h \
-		 ch1_window_management.h
+		 ch1_window_management.h \
+		 ch2_ray_casting.h
 
 # Combine all headers with their paths
 HDR	= $(addprefix $(INC_DIR)/, $(HDR_CH))
