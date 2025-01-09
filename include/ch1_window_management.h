@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:14:38 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/09 09:26:54 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/09 14:11:34 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 # define WINDOW_TITLE "cub3D"
 # define MOVE_SPEED 0.05
 # define ROT_SPEED 0.03
+# define FRAME_RATE 60
 
 typedef struct s_player
 {
@@ -52,6 +53,7 @@ void	init_hooks(t_mlx *win);
 void	init_player(t_player *player, t_map *map);
 void	init_ray_casting(t_mlx *win);
 void	rotate_player(t_player *player, double angle);
+void	render_frame(t_mlx *win);
 void	update_test_view(t_mlx *win);
 
 #endif
