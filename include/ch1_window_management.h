@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:14:38 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/09 09:05:31 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/09 09:26:54 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 # include <math.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
-# include "ch2_ray_casting.h"
 # include "ch0_scene_description_file.h"
 
 # define WINDOW_WIDTH 1024
@@ -51,6 +50,7 @@ int		update_player_position(t_player *player, t_map *map, mlx_t *mlx);
 void	cleanup_window(t_mlx *win);
 void	init_hooks(t_mlx *win);
 void	init_player(t_player *player, t_map *map);
+void	init_ray_casting(t_mlx *win);
 void	rotate_player(t_player *player, double angle);
 void	update_test_view(t_mlx *win);
 

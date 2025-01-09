@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 12:45:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/09 09:11:21 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/09 09:30:51 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,4 @@ void	draw_wall(t_mlx *win, t_ray *ray, int x)
 		mlx_put_pixel(win->img, x, y, color);
 		y++;
 	}
-}
-
-void	calculate_wall_height(t_ray *ray, int height)
-{
-	ray->line_height = (int)(height / ray->perp_wall_dist);
-	ray->draw_start = -ray->line_height / 2 + height / 2;
-	if (ray->draw_start < 0)
-		ray->draw_start = 0;
-	ray->draw_end = ray->line_height / 2 + height / 2;
-	if (ray->draw_end >= height)
-		ray->draw_end = height - 1;
 }
