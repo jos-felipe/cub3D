@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:17:39 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/07 16:17:09 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/09 08:58:44 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ int	init_window(t_mlx *win, t_scene *scene)
 	}
 	init_player(&win->player, &scene->map);
 	init_hooks(win);
+	init_ray_casting(win);
 	return (0);
 }
 

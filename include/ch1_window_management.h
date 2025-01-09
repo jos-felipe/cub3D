@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:14:38 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/07 16:48:33 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/09 09:05:31 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <math.h>
 # include "MLX42/MLX42.h"
 # include "libft.h"
+# include "ch2_ray_casting.h"
 # include "ch0_scene_description_file.h"
 
 # define WINDOW_WIDTH 1024

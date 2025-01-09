@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/09 10:00:00 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/09 09:15:02 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,13 @@ typedef struct s_ray
 void	cast_rays(t_mlx *win);
 void	calculate_ray_position(t_ray *ray, t_player *player, int x, int width);
 void	calculate_step_distance(t_ray *ray, t_player *player);
+void	init_ray_casting(t_mlx *win);
 void	perform_dda(t_ray *ray, t_map *map);
 void	calculate_wall_height(t_ray *ray, int height);
 
 /* Rendering functions */
 void	draw_vertical_line(t_mlx *win, t_ray *ray, int x);
+void	draw_wall(t_mlx *win, t_ray *ray, int x);
 void	render_frame(t_mlx *win);
 
 #endif
