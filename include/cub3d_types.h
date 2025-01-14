@@ -6,12 +6,12 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 17:24:44 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/14 17:39:06 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/14 19:11:33 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CUB3D_TYPES_H
-#define CUB3D_TYPES_H
+# define CUB3D_TYPES_H
 
 # include "MLX42/MLX42.h"
 
