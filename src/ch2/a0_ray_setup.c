@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:15:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/09 09:06:12 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:53:28 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch2_ray_casting.h"
+#include "ch1_window_management.h"
 
 static void	render_loop(void *param)
 {

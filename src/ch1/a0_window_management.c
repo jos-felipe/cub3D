@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   a0_window_management.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
+/*   By: expert42 <expert42@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/02 13:17:39 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/09 08:58:44 by josfelip         ###   ########.fr       */
+/*   Created: 2025/01/14 10:00:00 by expert42          #+#    #+#             */
+/*   Updated: 2025/01/14 10:00:00 by expert42         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static int	create_window(t_mlx *win);
 static int	create_image(t_mlx *win);
+static int	init_resources(t_mlx *win);
 
 int	init_window(t_mlx *win, t_scene *scene)
 {
@@ -22,9 +23,9 @@ int	init_window(t_mlx *win, t_scene *scene)
 	win->height = WINDOW_HEIGHT;
 	if (create_window(win) != 0)
 		return (1);
-	if (create_image(win) != 0)
+	if (init_resources(win) != 0)
 	{
-		mlx_terminate(win->mlx);
+		cleanup_window(win);
 		return (1);
 	}
 	init_player(&win->player, &scene->map);
@@ -63,12 +64,25 @@ static int	create_image(t_mlx *win)
 	return (0);
 }
 
+static int	init_resources(t_mlx *win)
+{
+	if (create_image(win) != 0)
+		return (1);
+	if (load_textures(win) != 0)
+	{
+		mlx_delete_image(win->mlx, win->img);
+		return (1);
+	}
+	return (0);
+}
+
 void	cleanup_window(t_mlx *win)
 {
 	if (!win)
 		return ;
 	if (win->mlx)
 	{
+		cleanup_textures(&win->textures);
 		mlx_delete_image(win->mlx, win->img);
 		mlx_terminate(win->mlx);
 	}
