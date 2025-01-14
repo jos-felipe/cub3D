@@ -1,5 +1,5 @@
-EA ./asset/texture/south.png
-WE ./asset/texture/south.png
+EA ./asset/texture/east.png
+WE ./asset/texture/west.png
 SO ./asset/texture/south.png
 NO ./asset/texture/north.png
 
