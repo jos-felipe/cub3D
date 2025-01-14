@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/19 23:13:13 by josfelip          #+#    #+#             */
-/*   Updated: 2024/12/19 11:57:16 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/14 17:38:13 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,54 +17,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 # include "../lib/libft/include/libft.h"
-
-typedef struct s_color
-{
-	int	r;
-	int	g;
-	int	b;
-}	t_color;
-
-typedef struct s_textures
-{
-	char	*north;
-	char	*south;
-	char	*west;
-	char	*east;
-}	t_textures;
-
-typedef struct s_map
-{
-	char	**grid;
-	int		width;
-	int		height;
-	int		player_x;
-	int		player_y;
-	char	player_dir;
-}	t_map;
-
-typedef struct s_scene
-{
-	t_textures	textures;
-	t_color		floor;
-	t_color		ceiling;
-	t_map		map;
-}	t_scene;
-
-typedef enum e_error
-{
-	INVALID_ARGS = 1,
-	INVALID_FILE_EXT,
-	INVALID_FD,
-	INVALID_MAP,
-	INVALID_TEXTURE,
-	INVALID_COLOR,
-	INVALID_PLAYER,
-	INVALID_MAP_CHARS,
-	INVALID_MALLOC,
-	INVALID_IDENTIFIER,
-	UNDEFINED_ERROR
-}	t_error;
+# include "cub3d_types.h"
 
 extern const char	*g_error_messages[];
 

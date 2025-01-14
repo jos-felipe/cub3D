@@ -6,7 +6,7 @@
 #    By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/07/20 12:34:41 by josfelip          #+#    #+#              #
-#    Updated: 2025/01/09 09:12:35 by josfelip         ###   ########.fr        #
+#    Updated: 2025/01/14 17:33:33 by josfelip         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -59,19 +59,25 @@ SRC_CH2		=	ch2/a0_ray_setup.c \
 				ch2/a3_ray_render.c \
 				ch2/a4_ray_colors.c
 
+SRC_CH3		=	ch3/a0_texture_management.c \
+				ch3/a1_texture_calculations.c
+
 # Combine all sources with their paths
 SRC	=	$(addprefix $(SRC_DIR)/, $(SRC_MAIN)) \
 		$(addprefix $(SRC_DIR)/, $(SRC_CH0)) \
 		$(addprefix $(SRC_DIR)/, $(SRC_CH1)) \
-		$(addprefix $(SRC_DIR)/, $(SRC_CH2))
+		$(addprefix $(SRC_DIR)/, $(SRC_CH2)) \
+		$(addprefix $(SRC_DIR)/, $(SRC_CH3))
 
 # Generate object file paths, maintaining directory structure
 OBJ	=	$(SRC:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
 # Chapter header files
-HDR_CH = ch0_scene_description_file.h \
+HDR_CH = cub3d_types.h \
+		 ch0_scene_description_file.h \
 		 ch1_window_management.h \
-		 ch2_ray_casting.h
+		 ch2_ray_casting.h \
+		 ch3_textures.h
 
 # Combine all headers with their paths
 HDR	= $(addprefix $(INC_DIR)/, $(HDR_CH))
@@ -108,13 +114,13 @@ $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c $(HDR)
 	
 # Clean object files
 clean:
+	$(RM) $(NAME)
+	$(RM) $(NAME)_debug
 	$(RM) $(OBJ_DIR)
 	$(RM) $(OBJ_DIR)_debug
 
 # Clean everything
 fclean: clean
-	$(RM) $(NAME)
-	$(RM) $(NAME)_debug
 	@make -C $(LIBFT_DIR) fclean --no-print-directory
 	$(RM) $(LIBMLX_DIR)/build
 	$(RM) valgrind_report.txt
