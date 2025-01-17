@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Base rock texture -->
+  <rect width="64" height="64" fill="#B8860B"/>
+  
+  <!-- Rock face details -->
+  <path d="M0 0 L64 0 L64 64 L0 64 Z" fill="#DEB887" fill-opacity="0.3"/>
+  
+  <!-- Simplified face carvings -->
+  <g fill="none" stroke="#8B4513" stroke-width="1">
+    <!-- First Hokage -->
+    <circle cx="16" cy="20" r="8"/>
+    <path d="M12 28 L20 28"/>
+    
+    <!-- Second Hokage -->
+    <circle cx="32" cy="20" r="8"/>
+    <path d="M28 28 L36 28"/>
+    
+    <!-- Third Hokage -->
+    <circle cx="48" cy="20" r="8"/>
+    <path d="M44 28 L52 28"/>
+  </g>
+  
+  <!-- Rock texture details -->
+  <g stroke="#A0522D" stroke-width="0.5" opacity="0.5">
+    <path d="M10 40 L20 40"/>
+    <path d="M30 45 L40 45"/>
+    <path d="M45 35 L55 35"/>
+    <path d="M5 50 L15 50"/>
+  </g>
+</svg>

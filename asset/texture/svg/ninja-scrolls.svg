@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Wooden background -->
+  <rect width="64" height="64" fill="#8B4513"/>
+  
+  <!-- Scrolls -->
+  <g transform="rotate(-10 32 32)">
+    <!-- Main scroll -->
+    <rect x="12" y="20" width="40" height="24" fill="#F5DEB3"/>
+    <rect x="12" y="20" width="40" height="4" fill="#DEB887"/>
+    <rect x="12" y="40" width="40" height="4" fill="#DEB887"/>
+    
+    <!-- Scroll ends -->
+    <circle cx="12" cy="32" r="4" fill="#DEB887"/>
+    <circle cx="52" cy="32" r="4" fill="#DEB887"/>
+    
+    <!-- Kanji-inspired markings -->
+    <g fill="none" stroke="#8B0000" stroke-width="1">
+      <path d="M20 28 L44 28"/>
+      <path d="M20 32 L44 32"/>
+      <path d="M20 36 L44 36"/>
+    </g>
+  </g>
+  
+  <!-- Kunai decoration -->
+  <path d="M8 8 L16 8 L12 16 Z" fill="#4A4A4A"/>
+  <rect x="11" y="4" width="2" height="4" fill="#4A4A4A"/>
+</svg>

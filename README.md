@@ -9,8 +9,13 @@ Roadmap:
 
 Player movement and collision 
 
-✓ Ray-casting engine (completed)
+Ray-casting engine (completed)
 
-👉 Texture mapping (current step)
+✓ Texture mapping (current step)
 
-Final touches (minimap, optimization)
+👉 Final touches
+
+The engine expects texture files to be in PNG (Portable Network Graphics) format, which provides high-quality images with support for transparency. Each texture must have exact dimensions of 64 by 64 pixels.
+
+Use FreeConvert (freeconvert.com) to convert SVG to PNG. This service offers batch conversion with good control over output settings:
+https://www.freeconvert.com/svg-to-png

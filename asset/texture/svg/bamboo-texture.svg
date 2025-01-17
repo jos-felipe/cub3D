@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#2D4F1E"/>
+  
+  <!-- Bamboo stalks -->
+  <g fill="#45682F">
+    <rect x="8" y="0" width="8" height="64"/>
+    <rect x="28" y="0" width="8" height="64"/>
+    <rect x="48" y="0" width="8" height="64"/>
+  </g>
+  
+  <!-- Bamboo nodes -->
+  <g fill="#1A2F12">
+    <rect x="8" y="16" width="8" height="4"/>
+    <rect x="8" y="48" width="8" height="4"/>
+    <rect x="28" y="8" width="8" height="4"/>
+    <rect x="28" y="40" width="8" height="4"/>
+    <rect x="48" y="24" width="8" height="4"/>
+    <rect x="48" y="56" width="8" height="4"/>
+  </g>
+  
+  <!-- Highlights -->
+  <g fill="#FFFFFF" opacity="0.1">
+    <rect x="10" y="0" width="2" height="64"/>
+    <rect x="30" y="0" width="2" height="64"/>
+    <rect x="50" y="0" width="2" height="64"/>
+  </g>
+</svg>

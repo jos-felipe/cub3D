@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#F5F3E8"/>
+  
+  <!-- Vertical grid lines -->
+  <g stroke="#D4CAB6" stroke-width="2">
+    <line x1="16" y1="0" x2="16" y2="64"/>
+    <line x1="32" y1="0" x2="32" y2="64"/>
+    <line x1="48" y1="0" x2="48" y2="64"/>
+  </g>
+  
+  <!-- Horizontal grid lines -->
+  <g stroke="#D4CAB6" stroke-width="2">
+    <line x1="0" y1="16" x2="64" y2="16"/>
+    <line x1="0" y1="32" x2="64" y2="32"/>
+    <line x1="0" y1="48" x2="64" y2="48"/>
+  </g>
+  
+  <!-- Paper texture overlay -->
+  <rect width="64" height="64" fill="#FFFFFF" opacity="0.1"/>
+</svg>
