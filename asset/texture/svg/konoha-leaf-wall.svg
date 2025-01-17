@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background wood pattern -->
+  <rect width="64" height="64" fill="#8B4513"/>
+  <rect x="0" y="0" width="64" height="16" fill="#A0522D" opacity="0.3"/>
+  <rect x="0" y="32" width="64" height="16" fill="#A0522D" opacity="0.3"/>
+  
+  <!-- Konoha Leaf Symbol -->
+  <path d="M32 12 
+           C38 12, 44 18, 44 24
+           C44 30, 38 36, 32 36
+           C26 36, 20 30, 20 24
+           C20 18, 26 12, 32 12
+           M32 16
+           C28 16, 24 20, 24 24
+           C24 28, 28 32, 32 32
+           C36 32, 40 28, 40 24
+           C40 20, 36 16, 32 16"
+        fill="#2E8B57"/>
+  
+  <!-- Spiral detail -->
+  <path d="M32 20
+           C34 20, 36 22, 36 24
+           L28 24
+           C28 22, 30 20, 32 20"
+        fill="#228B22"/>
+  
+  <!-- Wood grain details -->
+  <path d="M0 8 L64 8" stroke="#6B3E26" stroke-width="0.5"/>
+  <path d="M0 24 L64 24" stroke="#6B3E26" stroke-width="0.5"/>
+  <path d="M0 40 L64 40" stroke="#6B3E26" stroke-width="0.5"/>
+  <path d="M0 56 L64 56" stroke="#6B3E26" stroke-width="0.5"/>
+</svg>
