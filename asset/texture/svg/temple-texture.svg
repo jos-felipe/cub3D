@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <!-- Background -->
+  <rect width="64" height="64" fill="#8B4513"/>
+  
+  <!-- Decorative panels -->
+  <g fill="#A0522D">
+    <rect x="4" y="4" width="56" height="26" rx="1"/>
+    <rect x="4" y="34" width="56" height="26" rx="1"/>
+  </g>
+  
+  <!-- Panel decorations -->
+  <g fill="none" stroke="#6B3E11" stroke-width="1">
+    <circle cx="32" cy="17" r="8"/>
+    <circle cx="32" cy="47" r="8"/>
+    <path d="M16 8 L48 8"/>
+    <path d="M16 26 L48 26"/>
+    <path d="M16 38 L48 38"/>
+    <path d="M16 56 L48 56"/>
+  </g>
+  
+  <!-- Traditional patterns -->
+  <g fill="#6B3E11">
+    <circle cx="32" cy="17" r="4"/>
+    <circle cx="32" cy="47" r="4"/>
+  </g>
+  
+  <!-- Wood grain effect -->
+  <rect width="64" height="64" fill="#000000" opacity="0.05"/>
+</svg>
