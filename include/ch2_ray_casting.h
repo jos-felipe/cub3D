@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/21 16:01:44 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:19:16 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include "MLX42/MLX42.h"
 # include "libft.h"
 # include "cub3d_types.h"
+# include "ch1_window_management.h"
 
 /* Core ray-casting functions */
 void	initialize_ray(t_ray *ray, t_player *player, int x, int width);

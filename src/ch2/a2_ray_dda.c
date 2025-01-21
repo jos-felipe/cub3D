@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 11:30:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/14 17:55:17 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:14:16 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch1_window_management.h"
+#include "ch2_ray_casting.h"
 
 static void	perform_dda_step(t_ray *ray)
 {
