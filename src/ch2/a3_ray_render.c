@@ -6,11 +6,11 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/14 19:06:57 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:56:00 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch1_window_management.h"
+#include "ch2_ray_casting.h"
 
 static void	draw_ceiling(t_mlx *win, int x, int draw_start)
 {
@@ -55,8 +55,19 @@ void	draw_vertical_line(t_mlx *win, t_ray *ray, int x)
 
 void	render_frame(t_mlx *win)
 {
-	ft_memset(win->img->pixels, 0,
-		win->width * win->height * sizeof(int32_t));
-	cast_rays(win);
+	int		x;
+	t_ray	ray;
+
+	ft_bzero(win->img->pixels, win->width * win->height * sizeof(int32_t));
+	x = 0;
+	while (x < win->width)
+	{
+		initialize_ray(&ray, &win->player, x, win->width);
+		calculate_step_distance(&ray, &win->player);
+		perform_dda(&ray, &win->scene->map);
+		calculate_wall_height(&ray, win->height);
+		draw_vertical_line(win, &ray, x);
+		x++;
+	}
 	mlx_image_to_window(win->mlx, win->img, 0, 0);
 }

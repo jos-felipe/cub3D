@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 10:00:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/14 19:06:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:24:47 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int		update_player_position(t_player *player, t_map *map, mlx_t *mlx);
 void	cleanup_window(t_mlx *win);
 void	init_hooks(t_mlx *win);
 void	init_player(t_player *player, t_map *map);
-void	init_ray_casting(t_mlx *win);
+void	initialize_rendering(t_mlx *win);
 void	rotate_player(t_player *player, double angle);
 void	render_frame(t_mlx *win);
 

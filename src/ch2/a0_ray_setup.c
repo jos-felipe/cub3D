@@ -6,24 +6,15 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:15:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/14 17:53:28 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:36:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ch1_window_management.h"
+#include "ch2_ray_casting.h"
 
-static void	render_loop(void *param)
-{
-	t_mlx	*win;
+static void	render_loop(void *param);
 
-	win = (t_mlx *)param;
-	if (update_player_position(&win->player, &win->scene->map, win->mlx))
-	{
-		render_frame(win);
-	}
-}
-
-void	init_ray_casting(t_mlx *win)
+void	initialize_rendering(t_mlx *win)
 {
 	win->img = mlx_new_image(win->mlx, win->width, win->height);
 	if (!win->img)
@@ -37,19 +28,13 @@ void	init_ray_casting(t_mlx *win)
 	mlx_loop_hook(win->mlx, render_loop, win);
 }
 
-void	cast_rays(t_mlx *win)
+static void	render_loop(void *param)
 {
-	t_ray	ray;
-	int		x;
+	t_mlx	*win;
 
-	x = 0;
-	while (x < win->width)
+	win = (t_mlx *)param;
+	if (update_player_position(&win->player, &win->scene->map, win->mlx))
 	{
-		calculate_ray_position(&ray, &win->player, x, win->width);
-		calculate_step_distance(&ray, &win->player);
-		perform_dda(&ray, &win->scene->map);
-		calculate_wall_height(&ray, win->height);
-		draw_vertical_line(win, &ray, x);
-		x++;
+		render_frame(win);
 	}
 }
