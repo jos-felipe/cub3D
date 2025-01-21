@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:15:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/21 16:25:49 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/21 16:36:59 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,5 +38,3 @@ static void	render_loop(void *param)
 		render_frame(win);
 	}
 }
-
-
