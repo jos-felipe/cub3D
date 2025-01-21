@@ -6,7 +6,7 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 13:17:39 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/09 14:13:54 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/21 12:38:36 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,6 @@ static void	close_window(void *param)
 	mlx_close_window(win->mlx);
 }
 
-/*
-** Main game loop that handles:
-** 1. Input processing (ESC key)
-** 2. Game state updates (player position)
-** 3. Rendering the current frame
-*/
 static void	game_loop(void *param)
 {
 	t_mlx			*win;

@@ -6,13 +6,13 @@
 /*   By: josfelip <josfelip@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/09 10:15:00 by josfelip          #+#    #+#             */
-/*   Updated: 2025/01/14 17:54:08 by josfelip         ###   ########.fr       */
+/*   Updated: 2025/01/21 15:32:48 by josfelip         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ch1_window_management.h"
 
-void	calculate_ray_position(t_ray *ray, t_player *player, int x, int width)
+void	initialize_ray(t_ray *ray, t_player *player, int x, int width)
 {
 	ray->camera_x = 2 * x / (double)width - 1;
 	ray->dir_x = player->dir_x + (player->plane_x * ray->camera_x);
